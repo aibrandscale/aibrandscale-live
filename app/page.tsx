@@ -641,61 +641,113 @@ function CredentialsStrip() {
 }
 
 function SuitabilitySection() {
-  const yes = [
-    "Искаш реален онлайн доход, не пасивна приказка",
-    "Готов си да научиш система, не да гониш hack-ове",
-    "Имаш 7 дни търпение преди първия клиент",
-    "Не се срамуваш да напишеш на бизнес собственик",
-    "Гледаш на 90 минути обучение като инвестиция",
+  const oldItems = [
+    "€3K–€5K минимум, само за да започнеш да тестваш продукти",
+    "6–12 месеца преди да върнеш първото си евро, ако изобщо стигнеш дотам",
+    "Пренаситени пазари — всеки „печеливш продукт“ вече има 500 копия",
+    "Влизаш в директна битка с хора, започнали преди 10 години",
+    "Една промяна в алгоритъма може да срине всичко за една нощ",
   ];
-  const no = [
-    "Търсиш бутон „натисни → парите потичат“",
-    "Решил си предварително, че „AI е булшит“",
-    "Очакваш €10,000 на първия ден",
-    "Не можеш да отделиш 90 минути за обучението",
-    "Дойде да те „впечатли“, после да си гледаш Reels-ите",
+  const newItems = [
+    "Първият клиент е възможен още в първите 30 дни",
+    "Това е умение, а не продукт. Търсенето е огромно и постоянно",
+    "AI скъсява пътя, който преди отнемаше 10 години, до няколко седмици фокусирана работа",
+    "Свързано е директно с приходи. Бизнесите плащат, защото им носи реална възвращаемост",
+    "Каквото и да става в платформите, бизнесите винаги ще трябват реклами",
   ];
-  const Check = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={COLOR.purple100} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ flexShrink: 0, marginTop: 2 }}>
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
+
+  const RED = "#C44A4A";
+  const RED_BORDER = "rgba(196,74,74,0.32)";
+  const RED_GLOW =
+    "inset 32.972px 5.495px 167.131px -4.375px rgba(120,40,40,0.45), inset 19.148px 3.191px 97.060px -3.750px rgba(120,40,40,0.55), inset 11.698px 1.950px 59.295px -3.125px rgba(120,40,40,0.6), inset 7.244px 1.207px 36.717px -2.500px rgba(120,40,40,0.65), inset 4.357px 0.726px 22.086px -1.875px rgba(120,40,40,0.7), inset 2.389px 0.398px 12.108px -1.250px rgba(120,40,40,0.78), inset 1.008px 0.168px 5.108px -0.625px rgba(120,40,40,0.85)";
+
+  const cardBase = {
+    borderRadius: 14,
+    padding: "30px 28px",
+    display: "flex",
+    flexDirection: "column" as const,
+    gap: 18,
+  };
+
+  const oldCardStyle = {
+    ...cardBase,
+    border: `1px solid ${RED_BORDER}`,
+    boxShadow: RED_GLOW,
+    background: "rgba(255,255,255,0.002)",
+  };
+
   const Cross = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,138,138,0.85)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ flexShrink: 0, marginTop: 2 }}>
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
+    <span aria-hidden style={{ flexShrink: 0, width: 22, height: 22, borderRadius: "50%", border: `1px solid ${RED_BORDER}`, background: "rgba(196,74,74,0.12)", color: RED, display: "inline-flex", alignItems: "center", justifyContent: "center", marginTop: 1 }}>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </span>
   );
+  const Check = () => (
+    <span aria-hidden style={{ flexShrink: 0, width: 22, height: 22, borderRadius: "50%", border: `1px solid ${COLOR.purple800}`, background: "rgba(123,47,190,0.18)", color: COLOR.purple100, display: "inline-flex", alignItems: "center", justifyContent: "center", marginTop: 1 }}>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+    </span>
+  );
+
+  const cardEyebrow = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+    padding: "0 14px",
+    fontFamily: "Inter, Manrope, sans-serif",
+    fontWeight: 400,
+    fontStyle: "italic" as const,
+    fontSize: 11,
+    letterSpacing: "0.18em",
+    textTransform: "uppercase" as const,
+    color: COLOR.fg,
+    alignSelf: "center" as const,
+    lineHeight: 1.4,
+  };
+
   return (
     <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
-        <Eyebrow>Провери дали е за теб</Eyebrow>
-        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
-          За кого е и за кого НЕ е
+      <div style={{ textAlign: "center", maxWidth: 920, margin: "0 auto", marginBottom: 56 }}>
+        <Eyebrow>Ако си като повечето хора, които попадат на тази страница…</Eyebrow>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(22px, 3.6vw, 38px)", color: COLOR.fg, marginTop: 18, lineHeight: 1.18, letterSpacing: "0", textTransform: "uppercase" }}>
+          Не си изостанал. Не си бил без късмет.<br />
+          Просто са ти продали грешната възможност.
         </h2>
+        <p style={{ marginTop: 22, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: "clamp(14px, 2vw, 16px)", lineHeight: 1.65, maxWidth: 760, marginLeft: "auto", marginRight: "auto" }}>
+          Дропшипинг. Amazon FBA. SMM агенции. Crypto bots. Faceless YouTube. Всяко едно от тези „усвои“ пари, които нямаш. Време, което не можеш да си върнеш. AI рекламите обръщат играта — изпреварваш хора с години опит, защото теренът беше изчистен от нула.
+        </p>
       </div>
-      <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
-        <GlowCard style={{ padding: "28px 26px" }}>
-          <h3 className="font-alfabet-black" style={{ fontSize: 20, color: COLOR.fg, margin: 0, marginBottom: 16, letterSpacing: "-0.01em" }}>
-            За теб е, ако
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
+        {/* OLD MODELS — red tint */}
+        <div style={oldCardStyle}>
+          <span style={{ ...cardEyebrow, color: RED }}>Старите модели</span>
+          <h3 className="font-alfabet-black" style={{ fontSize: "clamp(18px, 2.4vw, 22px)", color: COLOR.fg, lineHeight: 1.3, letterSpacing: "-0.01em", margin: 0, textAlign: "center" }}>
+            Защо „старите“ онлайн бизнеси продължават да те разочароват
           </h3>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-            {yes.map((t, i) => (
-              <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.5 }}>
-                <Check />
+            {oldItems.map((t, i) => (
+              <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.55 }}>
+                <Cross />
                 <span>{t}</span>
               </li>
             ))}
           </ul>
-        </GlowCard>
-        <GlowCard style={{ padding: "28px 26px" }}>
-          <h3 className="font-alfabet-black" style={{ fontSize: 20, color: COLOR.fg, margin: 0, marginBottom: 16, letterSpacing: "-0.01em" }}>
-            НЕ е за теб, ако
+        </div>
+
+        {/* AI ADS — purple */}
+        <GlowCard style={{ padding: "30px 28px", display: "flex", flexDirection: "column", gap: 18 }}>
+          <span style={{ ...cardEyebrow, color: COLOR.purple100 }}>Защо AI рекламите са различни</span>
+          <h3 className="font-alfabet-black" style={{ fontSize: "clamp(18px, 2.4vw, 22px)", color: COLOR.fg, lineHeight: 1.3, letterSpacing: "-0.01em", margin: 0, textAlign: "center" }}>
+            Системата, която превръща AI в реален доход, а не в поредното отворено tab-че
           </h3>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-            {no.map((t, i) => (
-              <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.5 }}>
-                <Cross />
+            {newItems.map((t, i) => (
+              <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.55 }}>
+                <Check />
                 <span>{t}</span>
               </li>
             ))}
