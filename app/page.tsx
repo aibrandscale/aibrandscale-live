@@ -450,32 +450,94 @@ function SpeakerTimeline({ onOpen }: { onOpen: () => void }) {
 
 
 function ProblemSection() {
-  const items = [
-    "Гледаш как други правят €5K, €10K на месец онлайн. Не разбираш какво всъщност правят.",
-    "Започвал си курсове, гледал си видеа. В края знаеш повече термини, не печелиш повече пари.",
-    "Нямаш капитал да хвърлиш в още един „проект, който трябваше да сработи“.",
-    "Не си технически. Мислиш, че AI е за програмисти.",
-    "Не искаш фалшива агенция, която обещава, не доставя, пали клиентите си за 2 месеца.",
-    "Гледаш как времето ти изтича. Приятелите ти „имат нещо“. Ти още опитваш.",
+  const items: { headline: string; body: string; icon: React.ReactNode }[] = [
+    {
+      headline: "Гледаш как другите печелят",
+      body: "€5K, €10K на месец онлайн. Не разбираш какво всъщност правят.",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M3 17l6-6 4 4 8-8" />
+          <path d="M14 7h7v7" />
+        </svg>
+      ),
+    },
+    {
+      headline: "Повече термини, не повече пари",
+      body: "Започвал си курсове, гледал си видеа. В края знаеш по-малко, не повече.",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+          <line x1="9" y1="7" x2="15" y2="7" />
+        </svg>
+      ),
+    },
+    {
+      headline: "Няма капитал за пореден риск",
+      body: "Не можеш да хвърлиш още пари в „проект, който трябваше да сработи“.",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <rect x="2" y="6" width="20" height="13" rx="2" />
+          <path d="M2 11h20" />
+          <line x1="6" y1="15" x2="10" y2="15" />
+        </svg>
+      ),
+    },
+    {
+      headline: "AI ти изглежда сложно",
+      body: "Не си технически. Мислиш, че всичко това е за програмисти.",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <rect x="4" y="4" width="16" height="16" rx="3" />
+          <path d="M9 9h6v6H9z" />
+          <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" />
+        </svg>
+      ),
+    },
+    {
+      headline: "Не искаш фалшива агенция",
+      body: "Която обещава, не доставя, пали клиентите си за 2 месеца.",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+          <line x1="12" y1="9" x2="12" y2="13" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
+        </svg>
+      ),
+    },
+    {
+      headline: "Времето ти изтича",
+      body: "Приятелите ти вече „имат нещо“. Ти още опитваш.",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M6 2h12M6 22h12M7 2v5a5 5 0 0010 0V2M7 22v-5a5 5 0 0110 0v5" />
+        </svg>
+      ),
+    },
   ];
   return (
     <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
+      <div style={{ textAlign: "center", marginBottom: 56 }}>
         <Eyebrow>Познато ли ти е?</Eyebrow>
         <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
           Опитваш всичко, но<br />нищо не задържа
         </h2>
       </div>
-      <ol style={{ maxWidth: 760, margin: "0 auto", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 14 }}>
-        {items.map((t, i) => (
-          <li key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 18px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
-            <span aria-hidden style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, ${COLOR.purple600}, ${COLOR.purple500})`, color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: "Manrope, sans-serif", fontSize: 13, fontWeight: 700 }}>
-              {String(i + 1).padStart(2, "0")}
+      <div className="problem-grid" style={{ maxWidth: 1100, margin: "0 auto" }}>
+        {items.map((it, i) => (
+          <GlowCard key={i} interactive style={{ padding: "26px 24px", display: "flex", flexDirection: "column", gap: 14 }}>
+            <span aria-hidden style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, rgba(123,47,190,0.32), rgba(85,43,105,0.45))`, border: `1px solid ${COLOR.purple800}`, color: COLOR.purple100, display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <span style={{ width: 24, height: 24, display: "block" }}>{it.icon}</span>
             </span>
-            <span style={{ color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: "clamp(14px, 2vw, 16px)", lineHeight: 1.55 }}>{t}</span>
-          </li>
+            <h3 className="font-alfabet-black" style={{ fontSize: "clamp(16px, 2.2vw, 19px)", color: COLOR.fg, lineHeight: 1.25, letterSpacing: "-0.01em", margin: 0 }}>
+              {it.headline}
+            </h3>
+            <p style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14, lineHeight: 1.55 }}>
+              {it.body}
+            </p>
+          </GlowCard>
         ))}
-      </ol>
+      </div>
     </section>
   );
 }

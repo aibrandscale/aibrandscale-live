@@ -1616,3 +1616,19 @@ body { overflow-x: hidden; }
   transition: border-color 180ms var(--ease-out);
 }
 .input:focus { border-color: var(--accent); }
+
+/* Problem section grid: bento — 3 cols desktop, 2 tablet, 1 mobile */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .problem-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+}
+@media (min-width: 1024px) {
+  .problem-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .problem-grid > *:nth-child(2),
+  .problem-grid > *:nth-child(4),
+  .problem-grid > *:nth-child(6) { margin-top: 28px; }
+}
