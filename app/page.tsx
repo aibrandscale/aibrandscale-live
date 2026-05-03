@@ -562,20 +562,42 @@ function BenefitsSection() {
   ];
   return (
     <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
-        <Eyebrow>След 15 май</Eyebrow>
-        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
-          3 неща, които ще промениш
+      <div style={{ textAlign: "center", marginBottom: 56 }}>
+        <Eyebrow>Вътре в безплатното обучение</Eyebrow>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(22px, 3.6vw, 38px)", color: COLOR.fg, marginTop: 18, lineHeight: 1.18, letterSpacing: "0", textTransform: "uppercase", maxWidth: 980, marginLeft: "auto", marginRight: "auto" }}>
+          Системата, която превръща AI в реален доход,<br />
+          а не в още едно отворено ChatGPT tab-че.
         </h2>
       </div>
       <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18 }}>
         {items.map((it) => (
-          <GlowCard key={it.n} interactive style={{ padding: "28px 24px", display: "flex", flexDirection: "column", gap: 14 }}>
-            <span style={{ fontFamily: "Manrope, sans-serif", fontWeight: 800, fontSize: 28, color: COLOR.purple100, letterSpacing: "-0.02em" }}>{it.n}</span>
-            <h3 className="font-alfabet-black" style={{ fontSize: "clamp(18px, 2.4vw, 22px)", color: COLOR.fg, lineHeight: 1.2, letterSpacing: "-0.01em", margin: 0 }}>
+          <GlowCard key={it.n} interactive style={{ padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, position: "relative", overflow: "hidden", minHeight: 240 }}>
+            <span
+              aria-hidden
+              style={{
+                position: "absolute",
+                top: -16,
+                right: 4,
+                fontFamily: "Manrope, sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(96px, 14vw, 160px)",
+                lineHeight: 1,
+                letterSpacing: "-0.05em",
+                color: COLOR.purple100,
+                opacity: 0.13,
+                pointerEvents: "none",
+                userSelect: "none",
+              }}
+            >
+              {it.n}
+            </span>
+            <span style={{ fontFamily: "Inter, Manrope, sans-serif", fontWeight: 400, fontStyle: "italic", fontSize: 11, letterSpacing: "0.18em", color: COLOR.purple100, textTransform: "uppercase", position: "relative", zIndex: 1 }}>
+              Стъпка {it.n}
+            </span>
+            <h3 className="font-alfabet-black" style={{ fontSize: "clamp(18px, 2.4vw, 22px)", color: COLOR.fg, lineHeight: 1.2, letterSpacing: "-0.01em", margin: 0, marginTop: 4, position: "relative", zIndex: 1 }}>
               {it.title}
             </h3>
-            <p style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.55 }}>{it.body}</p>
+            <p style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.55, position: "relative", zIndex: 1 }}>{it.body}</p>
           </GlowCard>
         ))}
       </div>
