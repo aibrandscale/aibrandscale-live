@@ -8,6 +8,7 @@ import {
   GlowCard,
   TestimonialCard9x16,
   COLOR,
+  CARD_INNER_GLOW,
 } from "./_design";
 
 /* ─────────── CONFIG ─────────── */
@@ -545,60 +546,67 @@ function ProblemSection() {
 function BenefitsSection() {
   const items = [
     {
-      n: "01",
+      n: "1",
       title: "Ще разбереш AI ad системата",
       body: "Не теория. Реалната схема, по която обикновени хора правят €5K–€20K на месец, обслужвайки малки бизнеси с AI реклами. Стъпка по стъпка, без вода.",
     },
     {
-      n: "02",
+      n: "2",
       title: "Ще видиш как намираш първи клиент",
       body: "За 7 дни. Без cold email спам. Без LinkedIn автоматизация. Без позната в семейството. Точният поток, който работи в България.",
     },
     {
-      n: "03",
+      n: "3",
       title: "Ще научиш как да задържиш клиента",
       body: "За да плаща €1500–€5000 на месец без да се пазари. Какво обещаваш, какво доставяш и какво НЕ обещаваш.",
     },
   ];
   return (
     <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
-      <div style={{ textAlign: "center", marginBottom: 56 }}>
+      <div style={{ textAlign: "center", maxWidth: 1100, margin: "0 auto", marginBottom: 56 }}>
         <Eyebrow>Вътре в безплатното обучение</Eyebrow>
-        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(22px, 3.6vw, 38px)", color: COLOR.fg, marginTop: 18, lineHeight: 1.18, letterSpacing: "0", textTransform: "uppercase", maxWidth: 980, marginLeft: "auto", marginRight: "auto" }}>
+        <h2 style={{ fontFamily: "Manrope, sans-serif", fontWeight: 700, fontSize: "clamp(20px, 2.4vw, 32px)", color: COLOR.fg, marginTop: 18, lineHeight: 1.25, letterSpacing: "-0.02em", maxWidth: 1100, marginLeft: "auto", marginRight: "auto" }}>
           Системата, която превръща AI в реален доход,<br />
-          а не в още едно отворено ChatGPT tab-че.
+          а не просто в още една отворена страница в Google.
         </h2>
       </div>
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18 }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
         {items.map((it) => (
-          <GlowCard key={it.n} interactive style={{ padding: "28px 24px", display: "flex", flexDirection: "column", gap: 12, position: "relative", overflow: "hidden", minHeight: 240 }}>
-            <span
+          <div key={it.n} style={{ position: "relative", borderRadius: 16, overflow: "hidden", padding: 32, background: "rgba(255,255,255,0.002)", border: "1px solid rgba(255,255,255,0.30)", boxShadow: CARD_INNER_GLOW, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div
               aria-hidden
               style={{
                 position: "absolute",
-                top: -16,
-                right: 4,
+                top: -8,
+                right: 18,
                 fontFamily: "Manrope, sans-serif",
-                fontWeight: 900,
-                fontSize: "clamp(96px, 14vw, 160px)",
+                fontWeight: 800,
+                fontSize: "clamp(80px, 8vw, 120px)",
                 lineHeight: 1,
-                letterSpacing: "-0.05em",
-                color: COLOR.purple100,
-                opacity: 0.13,
-                pointerEvents: "none",
+                letterSpacing: "-0.04em",
+                background: "linear-gradient(180deg, rgba(196,155,217,0.22) 0%, rgba(196,155,217,0) 75%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
                 userSelect: "none",
+                pointerEvents: "none",
               }}
             >
-              {it.n}
-            </span>
-            <span style={{ fontFamily: "Inter, Manrope, sans-serif", fontWeight: 400, fontStyle: "italic", fontSize: 11, letterSpacing: "0.18em", color: COLOR.purple100, textTransform: "uppercase", position: "relative", zIndex: 1 }}>
-              Стъпка {it.n}
-            </span>
-            <h3 className="font-alfabet-black" style={{ fontSize: "clamp(18px, 2.4vw, 22px)", color: COLOR.fg, lineHeight: 1.2, letterSpacing: "-0.01em", margin: 0, marginTop: 4, position: "relative", zIndex: 1 }}>
-              {it.title}
-            </h3>
-            <p style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.55, position: "relative", zIndex: 1 }}>{it.body}</p>
-          </GlowCard>
+              0{it.n}
+            </div>
+            <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Manrope, sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: COLOR.purple100 }}>
+                <span style={{ width: 18, height: 1, background: COLOR.purple100 }} aria-hidden />
+                Стъпка 0{it.n}
+              </div>
+              <h3 className="font-alfabet-bold" style={{ fontSize: "clamp(19px, 1.7vw, 23px)", lineHeight: 1.2, color: COLOR.fg, margin: 0 }}>
+                {it.title}
+              </h3>
+              <p style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 15, lineHeight: 1.65 }}>
+                {it.body}
+              </p>
+            </div>
+          </div>
         ))}
       </div>
       <div style={{ marginTop: 36, display: "flex", justifyContent: "center" }}>
