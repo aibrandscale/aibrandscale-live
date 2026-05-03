@@ -6,12 +6,14 @@ import {
   PurpleAlertNav,
   Eyebrow,
   GlowCard,
+  TestimonialCard9x16,
   COLOR,
 } from "./_design";
 
 /* ─────────── CONFIG ─────────── */
 const EVENT_DATE_LABEL = "15 май 2026";
 const EVENT_TIME_LABEL = "18:00 ч.";
+const EVENT_ISO = "2026-05-15T18:00:00+03:00";
 
 /* ─────────── PRIMITIVES ─────────── */
 
@@ -447,6 +449,317 @@ function SpeakerTimeline({ onOpen }: { onOpen: () => void }) {
 }
 
 
+function ProblemSection() {
+  const items = [
+    "Гледаш как други правят €5K, €10K на месец онлайн. Не разбираш какво всъщност правят.",
+    "Започвал си курсове, гледал си видеа. В края знаеш повече термини, не печелиш повече пари.",
+    "Нямаш капитал да хвърлиш в още един „проект, който трябваше да сработи“.",
+    "Не си технически. Мислиш, че AI е за програмисти.",
+    "Не искаш фалшива агенция, която обещава, не доставя, пали клиентите си за 2 месеца.",
+    "Гледаш как времето ти изтича. Приятелите ти „имат нещо“. Ти още опитваш.",
+  ];
+  return (
+    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <Eyebrow>Познато ли ти е?</Eyebrow>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+          Опитваш всичко, но<br />нищо не задържа
+        </h2>
+      </div>
+      <ol style={{ maxWidth: 760, margin: "0 auto", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 14 }}>
+        {items.map((t, i) => (
+          <li key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 18px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
+            <span aria-hidden style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, ${COLOR.purple600}, ${COLOR.purple500})`, color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: "Manrope, sans-serif", fontSize: 13, fontWeight: 700 }}>
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span style={{ color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: "clamp(14px, 2vw, 16px)", lineHeight: 1.55 }}>{t}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function BenefitsSection() {
+  const items = [
+    {
+      n: "01",
+      title: "Ще разбереш AI ad системата",
+      body: "Не теория. Реалната схема, по която обикновени хора правят €5K–€20K на месец, обслужвайки малки бизнеси с AI реклами. Стъпка по стъпка, без вода.",
+    },
+    {
+      n: "02",
+      title: "Ще видиш как намираш първи клиент",
+      body: "За 7 дни. Без cold email спам. Без LinkedIn автоматизация. Без позната в семейството. Точният поток, който работи в България.",
+    },
+    {
+      n: "03",
+      title: "Ще научиш как да задържиш клиента",
+      body: "За да плаща €1500–€5000 на месец без да се пазари. Какво обещаваш, какво доставяш и какво НЕ обещаваш.",
+    },
+  ];
+  return (
+    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <Eyebrow>След 15 май</Eyebrow>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+          3 неща, които ще промениш
+        </h2>
+      </div>
+      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18 }}>
+        {items.map((it) => (
+          <GlowCard key={it.n} interactive style={{ padding: "28px 24px", display: "flex", flexDirection: "column", gap: 14 }}>
+            <span style={{ fontFamily: "Manrope, sans-serif", fontWeight: 800, fontSize: 28, color: COLOR.purple100, letterSpacing: "-0.02em" }}>{it.n}</span>
+            <h3 className="font-alfabet-black" style={{ fontSize: "clamp(18px, 2.4vw, 22px)", color: COLOR.fg, lineHeight: 1.2, letterSpacing: "-0.01em", margin: 0 }}>
+              {it.title}
+            </h3>
+            <p style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.55 }}>{it.body}</p>
+          </GlowCard>
+        ))}
+      </div>
+      <div style={{ marginTop: 36, display: "flex", justifyContent: "center" }}>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "10px 20px", borderRadius: 999, border: `1px solid ${COLOR.purple800}`, background: "rgba(85,43,105,0.18)", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: 14, fontWeight: 600 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: COLOR.purple100, boxShadow: `0 0 10px ${COLOR.purple100}` }} aria-hidden />
+          Бонус: Ще пусна реална кампания от 0 пред теб на живо
+        </span>
+      </div>
+    </section>
+  );
+}
+
+function CredentialsStrip() {
+  // NOTE: example numbers — replace with real metrics
+  const items = [
+    { big: "€1.2M+", label: "Генерирани в реклами за клиенти" },
+    { big: "240+", label: "Менторанти преминали през системата" },
+    { big: "80+", label: "Активни кампании в момента" },
+    { big: "5+", label: "Години в paid ads" },
+  ];
+  return (
+    <section style={{ padding: "clamp(40px, 6vw, 80px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <Eyebrow>Цифрите зад системата</Eyebrow>
+      </div>
+      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
+        {items.map((it) => (
+          <div key={it.label} style={{ padding: "26px 18px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)", textAlign: "center", display: "flex", flexDirection: "column", gap: 8 }}>
+            <span className="font-alfabet-black" style={{ fontSize: "clamp(34px, 5vw, 48px)", color: COLOR.fg, letterSpacing: "-0.02em", lineHeight: 1 }}>
+              {it.big}
+            </span>
+            <span style={{ fontSize: 12, fontFamily: "Manrope, sans-serif", color: COLOR.fgMuted, lineHeight: 1.5, letterSpacing: "0.02em" }}>
+              {it.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SuitabilitySection() {
+  const yes = [
+    "Искаш реален онлайн доход, не пасивна приказка",
+    "Готов си да научиш система, не да гониш hack-ове",
+    "Имаш 7 дни търпение преди първия клиент",
+    "Не се срамуваш да напишеш на бизнес собственик",
+    "Гледаш на 90 минути обучение като инвестиция",
+  ];
+  const no = [
+    "Търсиш бутон „натисни → парите потичат“",
+    "Решил си предварително, че „AI е булшит“",
+    "Очакваш €10,000 на първия ден",
+    "Не можеш да отделиш 90 минути за обучението",
+    "Дойде да те „впечатли“, после да си гледаш Reels-ите",
+  ];
+  const Check = () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={COLOR.purple100} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ flexShrink: 0, marginTop: 2 }}>
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+  const Cross = () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,138,138,0.85)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ flexShrink: 0, marginTop: 2 }}>
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+  return (
+    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <Eyebrow>Провери дали е за теб</Eyebrow>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+          За кого е и за кого НЕ е
+        </h2>
+      </div>
+      <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+        <GlowCard style={{ padding: "28px 26px" }}>
+          <h3 className="font-alfabet-black" style={{ fontSize: 20, color: COLOR.fg, margin: 0, marginBottom: 16, letterSpacing: "-0.01em" }}>
+            За теб е, ако
+          </h3>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+            {yes.map((t, i) => (
+              <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.5 }}>
+                <Check />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </GlowCard>
+        <GlowCard style={{ padding: "28px 26px" }}>
+          <h3 className="font-alfabet-black" style={{ fontSize: 20, color: COLOR.fg, margin: 0, marginBottom: 16, letterSpacing: "-0.01em" }}>
+            НЕ е за теб, ако
+          </h3>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+            {no.map((t, i) => (
+              <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.5 }}>
+                <Cross />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </GlowCard>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsSection() {
+  // NOTE: example placeholder cards — replace with real client video testimonials
+  const items = [
+    { duration: "1:24", caption: "Първи клиент за 9 дни — €1,800/мес" },
+    { duration: "2:08", caption: "От 0 до €4,500/мес за 6 седмици" },
+    { duration: "1:42", caption: "Напуснах работа след 3-я клиент" },
+    { duration: "1:55", caption: "€7,200 в първия месец след старта" },
+  ];
+  return (
+    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <Eyebrow>Реални резултати</Eyebrow>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+          Какво постигат хора,<br />които вече работят по системата
+        </h2>
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 18, maxWidth: 1100, margin: "0 auto" }}>
+        {items.map((it, i) => (
+          <TestimonialCard9x16 key={i} duration={it.duration} caption={it.caption} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FAQSection() {
+  const items = [
+    {
+      q: "Колко струва обучението?",
+      a: "0 лв. Безплатно е, защото вярвам, че част от хората, които видят какво показвам, ще искат да продължат с мен. Останалите ще си тръгнат със свободен план за €5K на месец. Никой не те задължава.",
+    },
+    {
+      q: "Има ли запис, ако пропусна?",
+      a: "Да, има limited replay за регистрираните до 48 часа след събитието. После се сваля. Опитът на живо е несравним — препоръчвам да дойдеш на 15 май.",
+    },
+    {
+      q: "Трябват ли ми технически умения?",
+      a: "Не. Ако можеш да напишеш съобщение в Messenger, имаш достатъчно. AI прави тежката част.",
+    },
+    {
+      q: "Колко време трае?",
+      a: "90 минути. Без вода, без 30 минути въведения. Идваш с тефтер.",
+    },
+    {
+      q: "Това продажба ли е накрая?",
+      a: "Накрая ще представя как можеш да продължиш да работиш с мен. Но дори да вземеш само безплатната част, ще си тръгнеш с конкретен план. Никой не те задължава.",
+    },
+    {
+      q: "Кога получавам линка за Google Meet?",
+      a: "Мигновен достъп — линкът пристига на имейла ти веднага след регистрация. Напомняне 1 час преди старта. Ако не го виждаш, провери „Промоции“ или „Спам“.",
+    },
+  ];
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <Eyebrow>ЧЗВ</Eyebrow>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+          Често задавани въпроси
+        </h2>
+      </div>
+      <div style={{ maxWidth: 760, margin: "0 auto", display: "flex", flexDirection: "column", gap: 12 }}>
+        {items.map((it, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={i} style={{ borderRadius: 14, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)", overflow: "hidden" }}>
+              <button
+                type="button"
+                onClick={() => setOpen(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "18px 22px", background: "transparent", border: 0, color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: "clamp(15px, 2.2vw, 17px)", fontWeight: 600, textAlign: "left", cursor: "pointer", lineHeight: 1.4 }}
+              >
+                <span>{it.q}</span>
+                <span aria-hidden style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", background: COLOR.pink100, color: COLOR.purple800, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 700, transition: "transform 200ms ease", transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>
+                  +
+                </span>
+              </button>
+              {isOpen && (
+                <div style={{ padding: "0 22px 22px", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.6 }}>
+                  {it.a}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function CountdownSection({ onOpen }: { onOpen: () => void }) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const target = new Date(EVENT_ISO).getTime();
+  const diff = Math.max(0, target - now);
+  const days = Math.floor(diff / 86_400_000);
+  const hours = Math.floor((diff / 3_600_000) % 24);
+  const mins = Math.floor((diff / 60_000) % 60);
+  const secs = Math.floor((diff / 1000) % 60);
+  const blocks = [
+    { val: days, label: "ДНИ" },
+    { val: hours, label: "ЧАСА" },
+    { val: mins, label: "МИНУТИ" },
+    { val: secs, label: "СЕКУНДИ" },
+  ];
+  return (
+    <section style={{ padding: "clamp(56px, 9vw, 110px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+        <Eyebrow>Последен шанс</Eyebrow>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+          Местата свършват
+        </h2>
+        <p style={{ marginTop: 16, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: "clamp(14px, 2vw, 16px)", lineHeight: 1.55, maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
+          Регистрацията е безплатна, но местата са лимитирани. След {EVENT_DATE_LABEL} линкът изчезва.
+        </p>
+        <div style={{ marginTop: 36, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "clamp(8px, 2vw, 16px)", maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
+          {blocks.map((b) => (
+            <div key={b.label} style={{ padding: "18px 8px", borderRadius: 14, border: `1px solid ${COLOR.purple800}`, background: "rgba(85,43,105,0.18)", display: "flex", flexDirection: "column", gap: 4, alignItems: "center" }}>
+              <span className="font-alfabet-black" style={{ fontSize: "clamp(28px, 6vw, 44px)", color: COLOR.fg, lineHeight: 1, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.02em" }}>
+                {String(b.val).padStart(2, "0")}
+              </span>
+              <span style={{ fontSize: 11, letterSpacing: "0.14em", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontWeight: 600 }}>
+                {b.label}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: 40, display: "flex", justifyContent: "center" }}>
+          <ScrollToFormCTA onOpen={onOpen} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -693,8 +1006,15 @@ export default function Page() {
       <main className="overflow-x-hidden w-full">
         <Hero onOpen={open} />
         <BrandsStrip onOpen={open} />
+        <ProblemSection />
+        <BenefitsSection />
         <EventDetails onOpen={open} />
+        <CredentialsStrip />
         <SpeakerTimeline onOpen={open} />
+        <SuitabilitySection />
+        <TestimonialsSection />
+        <FAQSection />
+        <CountdownSection onOpen={open} />
       </main>
       <Footer />
       <RegisterModal open={modalOpen} onClose={close} />
