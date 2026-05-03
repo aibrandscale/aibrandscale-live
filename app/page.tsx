@@ -705,7 +705,7 @@ function SuitabilitySection() {
     alignItems: "center",
     gap: 10,
     padding: "0 14px",
-    fontFamily: "Inter, Manrope, sans-serif",
+    fontFamily: "Manrope, sans-serif",
     fontWeight: 400,
     fontStyle: "italic" as const,
     fontSize: 11,

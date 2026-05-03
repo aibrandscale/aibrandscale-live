@@ -150,7 +150,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
       <span style={{ ...rule, flexShrink: 0 }} />
       <span
         style={{
-          fontFamily: "Inter, Manrope, sans-serif",
+          fontFamily: "Manrope, sans-serif",
           fontWeight: 300,
           fontStyle: "italic",
           fontSize: "clamp(11px, 2.6vw, 14px)",
@@ -451,7 +451,7 @@ export function LockedVideo({
           padding: "0 14px",
           background: "linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0))",
           color: "#fff",
-          fontFamily: "Inter, Manrope, sans-serif",
+          fontFamily: "Manrope, sans-serif",
           fontSize: 12,
           letterSpacing: "0.05em",
         }}

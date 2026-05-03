@@ -354,9 +354,10 @@ input, textarea {
   box-shadow: 0 0 8px rgba(102,224,163,0.7);
 }
 .speaker-banner__title {
-  font-family: 'Alfabet Black', Manrope, sans-serif;
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
   font-size: clamp(22px, 3.4vw, 34px);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.02em;
   color: #fff;
   margin: 0 0 10px;
   line-height: 1.12;
@@ -1299,7 +1300,7 @@ html, body {
     linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
   background-size: 28px 28px;
   color: var(--text);
-  font-family: "DM Sans", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   line-height: 1.62;
 }
@@ -1310,11 +1311,11 @@ body { overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--bg); }
 
 /* Family helpers */
-.font-alfabet-sb    { font-family: "Alfabet SemiBold", "Manrope", system-ui, sans-serif; font-weight: 600; }
-.font-alfabet-bold  { font-family: "Alfabet Bold", "Manrope", system-ui, sans-serif; font-weight: 700; }
-.font-alfabet-black { font-family: "Alfabet Black", "Manrope", system-ui, sans-serif; font-weight: 850; }
-.font-felt          { font-family: "Felt Tip Roman Bold", "Caveat", cursive; font-weight: 700; }
-.font-felt-regular  { font-family: "Felt Tip Roman Regular", "Caveat", cursive; font-weight: 400; }
+.font-alfabet-sb    { font-family: "Manrope", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.01em; }
+.font-alfabet-bold  { font-family: "Manrope", system-ui, sans-serif; font-weight: 700; letter-spacing: -0.015em; }
+.font-alfabet-black { font-family: "Manrope", system-ui, sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+.font-felt          { font-family: "Manrope", system-ui, sans-serif; font-weight: 700; letter-spacing: -0.015em; }
+.font-felt-regular  { font-family: "Manrope", system-ui, sans-serif; font-weight: 500; letter-spacing: -0.005em; }
 
 /* Type scale (sizes lifted from live site SSR) */
 .t-hero {
