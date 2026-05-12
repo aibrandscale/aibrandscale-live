@@ -261,7 +261,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             БЕЗ нужен предишен опит
           </span>
         </div>
-        <div style={{ marginTop: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 10, flexWrap: "nowrap", whiteSpace: "nowrap" }}>
+        <div style={{ marginTop: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 12, flexWrap: "nowrap" }}>
           <div aria-hidden style={{ display: "inline-flex", flexShrink: 0 }}>
             {["/avatar-1.jpg", "/avatar-2.jpg", "/avatar-3.png"].map((src, idx) => (
               <span
@@ -290,7 +290,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
               </span>
             ))}
           </div>
-          <p style={{ margin: 0, fontFamily: "Manrope, sans-serif", fontSize: "clamp(10.5px, 2.4vw, 14px)", color: COLOR.fg, lineHeight: 1.4, textShadow: "0 1px 10px rgba(0,0,0,0.7)", whiteSpace: "nowrap" }}>
+          <p style={{ margin: 0, fontFamily: "Manrope, sans-serif", fontSize: "clamp(13px, 3vw, 16px)", color: COLOR.fg, lineHeight: 1.4, textShadow: "0 1px 10px rgba(0,0,0,0.7)", maxWidth: 240, textAlign: "left", flexShrink: 1, minWidth: 0 }}>
             Вече над <strong style={{ fontWeight: 800 }}>80 души</strong> са записани · остават ограничен брой места
           </p>
         </div>
