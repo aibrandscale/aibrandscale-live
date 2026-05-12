@@ -62,32 +62,15 @@ export function useCanHover() {
 /* ──────── alert nav strip (marquee) ──────── */
 export function PurpleAlertNav({
   text = "Още не си се записал? Вземи безплатен достъп сега",
-  speedSec = 60,
-  copies = 8,
+  liveLabel = "LIVE",
+  extraLabel,
 }: {
   text?: string;
   speedSec?: number;
   copies?: number;
+  liveLabel?: string;
+  extraLabel?: string;
 }) {
-  const items = Array.from({ length: copies });
-  const itemStyle: CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 10,
-    padding: "0 28px",
-    fontFamily: "Manrope, sans-serif",
-    fontSize: "clamp(13px, 1.5vw, 16px)",
-    color: "#fff",
-    fontWeight: 500,
-    letterSpacing: "0.01em",
-    whiteSpace: "nowrap",
-    textTransform: "uppercase",
-  };
-  const Arrow = () => (
-    <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M12 5v14M6 13l6 6 6-6" />
-    </svg>
-  );
   return (
     <div
       role="region"
@@ -95,36 +78,82 @@ export function PurpleAlertNav({
       style={{
         position: "relative",
         zIndex: 60,
-        height: 38,
-        background: "rgba(85,43,105,0.95)",
-        backdropFilter: "blur(7px)",
-        WebkitBackdropFilter: "blur(7px)",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
-        overflow: "hidden",
+        minHeight: 48,
+        background: "rgba(255,255,255,0.002)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        borderBottom: "1px solid rgba(255,255,255,0.18)",
+        boxShadow: CARD_INNER_GLOW,
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
+        padding: "8px 14px",
+        gap: 14,
+        flexWrap: "wrap",
       }}
     >
-      <div className="alert-static" style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: "0 12px" }}>
-        <span style={{ ...itemStyle, padding: 0, fontSize: "clamp(11px, 3vw, 13px)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-          <Arrow />
-          <span>{text}</span>
-          <Arrow />
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+        <span
+          aria-hidden
+          className="alert-live-dot"
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: "50%",
+            background: "#EF4444",
+            boxShadow: "0 0 0 0 rgba(239,68,68,0.7)",
+          }}
+        />
+        <span
+          style={{
+            fontFamily: "Manrope, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(13px, 1.6vw, 15px)",
+            letterSpacing: "0.12em",
+            color: "#EF4444",
+            textTransform: "uppercase",
+          }}
+        >
+          {liveLabel}
         </span>
-      </div>
-      <div className="logi-marquee-track alert-marquee" style={{ whiteSpace: "nowrap" }}>
-        {[0, 1].map((g) => (
-          <div key={g} aria-hidden={g === 1} style={{ display: "flex", alignItems: "center" }}>
-            {items.map((_, i) => (
-              <span key={i} style={itemStyle}>
-                <Arrow />
-                <span>{text}</span>
-                <Arrow />
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
+      </span>
+      <span
+        aria-hidden
+        style={{ width: 1, height: 16, background: "rgba(255,255,255,0.18)" }}
+      />
+      <span
+        style={{
+          fontFamily: "Manrope, sans-serif",
+          fontWeight: 800,
+          fontSize: "clamp(13px, 1.6vw, 15px)",
+          letterSpacing: "0.02em",
+          color: "#FFFFFF",
+          textAlign: "center",
+        }}
+      >
+        {text}
+      </span>
+      {extraLabel && (
+        <>
+          <span
+            aria-hidden
+            style={{ width: 1, height: 16, background: "rgba(255,255,255,0.18)" }}
+          />
+          <span
+            style={{
+              fontFamily: "Manrope, sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(13px, 1.6vw, 15px)",
+              letterSpacing: "0.08em",
+              color: "#FFFFFF",
+              textTransform: "uppercase",
+              textAlign: "center",
+            }}
+          >
+            {extraLabel}
+          </span>
+        </>
+      )}
     </div>
   );
 }
@@ -175,12 +204,14 @@ export function GlowCard({
   width,
   minHeight,
   interactive = false,
+  className,
 }: {
   children: ReactNode;
   style?: CSSProperties;
   width?: number | string;
   minHeight?: number | string;
   interactive?: boolean;
+  className?: string;
 }) {
   const [hover, setHover] = useState(false);
   const [press, setPress] = useState(false);
@@ -196,6 +227,7 @@ export function GlowCard({
     : "translateY(0)";
   return (
     <div
+      className={className}
       onMouseEnter={interactive ? () => setHover(true) : undefined}
       onMouseLeave={interactive ? () => { setHover(false); setPress(false); } : undefined}
       onPointerDown={interactive ? () => setPress(true) : undefined}
@@ -505,7 +537,8 @@ export function TestimonialCard9x16({
       onBlur={() => setFocus(false)}
       style={{
         position: "relative",
-        width: 240,
+        width: "100%",
+        maxWidth: 180,
         aspectRatio: "9 / 16",
         borderRadius: 14,
         overflow: "hidden",

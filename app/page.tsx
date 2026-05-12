@@ -32,10 +32,12 @@ function ReserveCTAButton({
   type = "button",
   onClick,
   children,
+  fullWidth = false,
 }: {
   type?: "button" | "submit";
   onClick?: () => void;
   children: React.ReactNode;
+  fullWidth?: boolean;
 }) {
   return (
     <button
@@ -48,8 +50,8 @@ function ReserveCTAButton({
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "20px clamp(22px, 6vw, 80px)",
-        minHeight: 64,
+        padding: "14px clamp(22px, 6vw, 80px)",
+        minHeight: 52,
         borderRadius: 1000,
         cursor: "pointer",
         fontFamily: "Manrope, sans-serif",
@@ -61,11 +63,11 @@ function ReserveCTAButton({
         lineHeight: 1.25,
         textTransform: "uppercase",
         background:
-          "linear-gradient(180deg, rgba(123,47,190,0.35) 0%, rgba(85,43,105,0.30) 50%, rgba(30,18,52,0.45) 100%)",
-        border: "1px solid rgba(255,255,255,0.30)",
+          "linear-gradient(180deg, rgba(52,211,153,0.95) 0%, rgba(16,185,129,0.95) 50%, rgba(5,122,85,1) 100%)",
+        border: "1px solid rgba(167,243,208,0.55)",
         outline: "none",
-        maxWidth: 600,
-        width: "auto",
+        maxWidth: fullWidth ? "none" : 600,
+        width: fullWidth ? "100%" : "auto",
         whiteSpace: "nowrap",
       }}
     >
@@ -74,9 +76,10 @@ function ReserveCTAButton({
   );
 }
 
-function ScrollToFormCTA({ onOpen }: { onOpen?: () => void }) {
+function ScrollToFormCTA({ onOpen, fullWidth = false }: { onOpen?: () => void; fullWidth?: boolean }) {
   return (
     <ReserveCTAButton
+      fullWidth={fullWidth}
       onClick={() => {
         if (onOpen) {
           onOpen();
@@ -144,7 +147,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           left: "50%",
           top: "min(410px, 50vw)",
           transform: "translate(-50%, -52%)",
-          width: "min(760px, 95vw)",
+          width: "min(880px, 105vw)",
           aspectRatio: "1 / 1",
           backgroundImage: "url(/hero-venelin.png)",
           backgroundSize: "contain",
@@ -153,7 +156,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           zIndex: -1,
         }}
       />
-      <div style={{ maxWidth: 760, margin: "0 auto", position: "relative", marginTop: "clamp(150px, 32vw, 300px)" }}>
+      <div style={{ maxWidth: 760, margin: "0 auto", position: "relative", marginTop: "clamp(170px, 36vw, 320px)" }}>
         <Image
           src="/exploit-logo.png"
           alt="AI Exploit Event"
@@ -161,7 +164,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           height={77}
           priority
           unoptimized
-          style={{ width: "clamp(90px, 11vw, 140px)", height: "auto", display: "block", margin: "0 auto 18px", imageRendering: "auto" }}
+          style={{ width: "clamp(120px, 14vw, 180px)", height: "auto", display: "block", margin: "0 auto 18px", imageRendering: "auto" }}
         />
         <div style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "6px 14px", borderRadius: 999, background: "rgba(10,6,18,0.55)", backdropFilter: "blur(8px)", marginBottom: 22 }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff3b3b", boxShadow: "0 0 10px rgba(255,59,59,0.7)", flexShrink: 0 }} aria-hidden />
@@ -172,7 +175,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         <h1
           className="font-alfabet-black"
           style={{
-            fontSize: "clamp(16px, 2.6vw, 28px)",
+            fontSize: "clamp(22px, 4vw, 40px)",
             lineHeight: 1.15,
             letterSpacing: "-0.01em",
             color: COLOR.fg,
@@ -185,23 +188,62 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         </h1>
         <p
           style={{
-            marginTop: 18,
-            fontSize: "clamp(13px, 1.7vw, 15px)",
+            marginTop: 20,
+            fontSize: "clamp(15.5px, 2.2vw, 19px)",
             lineHeight: 1.55,
-            color: COLOR.fg,
+            fontWeight: 500,
+            color: "#CDD0D7",
             fontFamily: "Manrope, sans-serif",
-            maxWidth: 580,
+            maxWidth: 620,
+            textWrap: "balance",
             marginLeft: "auto",
             marginRight: "auto",
             textShadow: "0 1px 16px rgba(0,0,0,0.7)",
           }}
         >
-          Ще ти покажа точно как със само няколко часа на ден изграждаш печеливш AI бизнес — без технически умения и без предишен опит.
+          Ще ти покажа как с няколко часа на ден изграждаш AI бизнес без технически умения и без предишен опит.
         </p>
-        <div style={{ marginTop: 26, display: "flex", justifyContent: "center" }}>
-          <ScrollToFormCTA onOpen={onOpen} />
+        <div className="hero-cta-stack" style={{ marginTop: 26, display: "flex", flexDirection: "column", alignItems: "center", gap: 12, maxWidth: 460, marginLeft: "auto", marginRight: "auto" }}>
+          <ScrollToFormCTA onOpen={onOpen} fullWidth />
+          <button
+            type="button"
+            onClick={() => {
+              const el = document.getElementById("benefits");
+              el?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            style={{
+              position: "relative",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "14px clamp(22px, 6vw, 80px)",
+              minHeight: 52,
+              borderRadius: 1000,
+              cursor: "pointer",
+              fontFamily: "Manrope, sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(13px, 3.2vw, 17px)",
+              letterSpacing: "0.02em",
+              color: "#fff",
+              textAlign: "center",
+              lineHeight: 1.25,
+              textTransform: "uppercase",
+              background: "rgba(123,47,190,0.10)",
+              border: "1.5px solid rgba(168,108,224,0.65)",
+              outline: "none",
+              width: "100%",
+              whiteSpace: "nowrap",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              transition: "background 180ms ease, border-color 180ms ease",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(123,47,190,0.20)"; e.currentTarget.style.borderColor = "rgba(196,155,217,0.85)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(123,47,190,0.10)"; e.currentTarget.style.borderColor = "rgba(168,108,224,0.65)"; }}
+          >
+            Какво ще научиш
+          </button>
         </div>
-        <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px 24px", fontSize: "clamp(13px, 1.5vw, 15px)", fontFamily: "Manrope, sans-serif", color: COLOR.fg, fontWeight: 500, textShadow: "0 1px 10px rgba(0,0,0,0.7)" }}>
+        <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px 24px", fontSize: "clamp(14.5px, 1.7vw, 16.5px)", fontFamily: "Manrope, sans-serif", color: COLOR.fg, fontWeight: 500, textShadow: "0 1px 10px rgba(0,0,0,0.7)" }}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={COLOR.purple100} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ flexShrink: 0 }}>
               <polyline points="16 18 22 12 16 6" />
@@ -219,12 +261,45 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             БЕЗ нужен предишен опит
           </span>
         </div>
+        <div style={{ marginTop: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 10, flexWrap: "nowrap", whiteSpace: "nowrap" }}>
+          <div aria-hidden style={{ display: "inline-flex", flexShrink: 0 }}>
+            {["/avatar-1.jpg", "/avatar-2.jpg", "/avatar-3.png"].map((src, idx) => (
+              <span
+                key={idx}
+                style={{
+                  display: "inline-block",
+                  width: 28,
+                  height: 28,
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  border: "1px solid rgba(196,155,217,0.55)",
+                  marginLeft: idx === 0 ? 0 : -10,
+                  boxShadow: "0 1px 4px rgba(0,0,0,0.35)",
+                  position: "relative",
+                  background: "#1a0f24",
+                }}
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  width={28}
+                  height={28}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  unoptimized
+                />
+              </span>
+            ))}
+          </div>
+          <p style={{ margin: 0, fontFamily: "Manrope, sans-serif", fontSize: "clamp(10.5px, 2.4vw, 14px)", color: COLOR.fg, lineHeight: 1.4, textShadow: "0 1px 10px rgba(0,0,0,0.7)", whiteSpace: "nowrap" }}>
+            Вече над <strong style={{ fontWeight: 800 }}>80 души</strong> са записани · остават ограничен брой места
+          </p>
+        </div>
       </div>
     </section>
   );
 }
 
-function BrandsStrip({ onOpen }: { onOpen: () => void }) {
+function BrandsStrip() {
   const logos: { src: string; h: number }[] = [
     { src: "/brands/logo1.webp", h: 72 },
     { src: "/brands/logo2.webp", h: 110 },
@@ -234,9 +309,9 @@ function BrandsStrip({ onOpen }: { onOpen: () => void }) {
   ];
   const items = [...logos, ...logos];
   return (
-    <section style={{ padding: "clamp(40px, 6vw, 80px) clamp(16px, 4vw, 32px)", textAlign: "center" }}>
+    <section style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)", textAlign: "center" }}>
       <div style={{ marginBottom: 28 }}>
-        <Eyebrow>Бизнеси и инфлуенсъри, които ми се довериха</Eyebrow>
+        <Eyebrow>Бизнеси и инфлуенсъри,<br />които ми се довериха</Eyebrow>
       </div>
       <div className="logo-ticker">
         <div className="logo-ticker__track">
@@ -254,70 +329,103 @@ function BrandsStrip({ onOpen }: { onOpen: () => void }) {
           ))}
         </div>
       </div>
-      <div style={{ marginTop: 40, display: "flex", justifyContent: "center" }}>
-        <ScrollToFormCTA onOpen={onOpen} />
-      </div>
     </section>
   );
 }
 
 function EventDetails({ onOpen }: { onOpen: () => void }) {
-  const items = [
+  const items: { label: string; live: boolean; headline: string; sub: string; body: string; icon: React.ReactNode }[] = [
     {
-      label: "КАКВО",
+      label: "Какво",
       live: false,
       headline: "AI Challenge",
       sub: "100% безплатен",
-      body: "На живо ще покажа как изграждаш печеливш AI бизнес от нулата — стъпка по стъпка, без вода.",
+      body: "На живо ще покажа как изграждаш печеливш AI бизнес от нулата, стъпка по стъпка.",
+      icon: (
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          {/* AI sparkle — main + accents */}
+          <path d="M32 8 L36.5 24.5 L53 29 L36.5 33.5 L32 50 L27.5 33.5 L11 29 L27.5 24.5 Z" />
+          <path d="M50 10 L52 16 L58 18 L52 20 L50 26 L48 20 L42 18 L48 16 Z" strokeWidth="1.8" />
+          <path d="M14 42 L15.5 47 L20.5 48.5 L15.5 50 L14 55 L12.5 50 L7.5 48.5 L12.5 47 Z" strokeWidth="1.6" />
+        </svg>
+      ),
     },
     {
-      label: "НА ЖИВО",
+      label: "На живо",
       live: true,
       headline: EVENT_DATE_LABEL,
       sub: `${EVENT_TIME_LABEL}`,
-      body: "Едно събитие на живо. Ще има limited reply за регистрираните, но опитът на живо е несравним.",
+      body: "Едно събитие на живо. Има ограничен брой места за регистрация, но опитът на живо е несравним.",
+      icon: (
+        <img src="/icons/calendar.png" alt="" style={{ width: "85%", height: "85%", objectFit: "contain", display: "block", opacity: 0.08, filter: "brightness(0) saturate(100%) invert(74%) sepia(20%) saturate(700%) hue-rotate(240deg)" }} />
+      ),
     },
     {
-      label: "КЪДЕ",
+      label: "Къде",
       live: false,
-      headline: "Google Meet",
+      headline: "Zoom",
       sub: "Онлайн",
       body: "Линкът за достъп се изпраща на имейла ти веднага след като запазиш мястото си.",
+      icon: (
+        <img src="/icons/camera.png" alt="" style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block", opacity: 0.08, filter: "brightness(0) saturate(100%) invert(74%) sepia(20%) saturate(700%) hue-rotate(240deg)", transform: "translateX(-6%)" }} />
+      ),
     },
   ];
   return (
-    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+    <section style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
       <div style={{ textAlign: "center", marginBottom: 40 }}>
         <Eyebrow>Всички важни детайли</Eyebrow>
         <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
           Какво те очаква на живо
         </h2>
       </div>
-      <div className="trust-pills-grid" style={{ maxWidth: 1100 }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "clamp(12px, 2vw, 22px)" }}>
         {items.map((it) => (
-          <div key={it.label} className="trust-pill" style={{ justifyContent: "space-between", minHeight: 240 }}>
-            <div className="trust-pill__top">
-              <span className={`trust-pill__badge${it.live ? " live" : ""}`}>
-                {it.live && <span className="trust-pill__dot" />}
-                {it.label}
-              </span>
+          <div key={it.label} style={{ position: "relative", borderRadius: 16, overflow: "hidden", padding: 32, background: "rgba(255,255,255,0.002)", border: "1px solid rgba(255,255,255,0.30)", boxShadow: CARD_INNER_GLOW, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div
+              aria-hidden
+              className="event-icon-bg"
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "min(130px, 40%)",
+                aspectRatio: "1 / 1",
+                color: "rgba(196,155,217,0.08)",
+                pointerEvents: "none",
+                zIndex: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {it.icon}
             </div>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-              <span className="trust-pill__big" style={{ fontSize: "clamp(28px, 3.4vw, 38px)", fontFamily: "Manrope, sans-serif", fontWeight: 800, letterSpacing: "-0.01em" }}>
+            <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, fontFamily: "Manrope, sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: COLOR.purple100 }}>
+                <span style={{ width: 18, height: 1, background: COLOR.purple100 }} aria-hidden />
+                {it.live && <span className="alert-live-dot" style={{ width: 7, height: 7, borderRadius: "50%", background: "#EF4444" }} aria-hidden />}
+                {it.label}
+                <span style={{ width: 18, height: 1, background: COLOR.purple100 }} aria-hidden />
+              </div>
+              <h3 className="font-alfabet-bold" style={{ fontSize: "clamp(24px, 2.6vw, 32px)", lineHeight: 1.15, color: COLOR.fg, margin: 0, letterSpacing: "-0.01em" }}>
                 {it.headline}
-              </span>
+              </h3>
               {it.sub && (
-                <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", color: "rgba(255,255,255,0.62)", fontFamily: "Manrope, sans-serif" }}>
+                <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: COLOR.purple100, fontFamily: "Manrope, sans-serif" }}>
                   {it.sub}
                 </span>
               )}
+              <p style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 15, lineHeight: 1.65 }}>
+                {it.body}
+              </p>
             </div>
-            <p className="trust-pill__copy" style={{ width: "100%", textAlign: "center", fontSize: 12.5, lineHeight: 1.5 }}>{it.body}</p>
           </div>
         ))}
       </div>
-      <div style={{ marginTop: 48, display: "flex", justifyContent: "center" }}>
-        <ScrollToFormCTA onOpen={onOpen} />
+      <div style={{ marginTop: 36, maxWidth: 1100, marginLeft: "auto", marginRight: "auto" }}>
+        <ScrollToFormCTA onOpen={onOpen} fullWidth />
       </div>
     </section>
   );
@@ -329,7 +437,7 @@ function SpeakerTimeline({ onOpen }: { onOpen: () => void }) {
       n: "01",
       year: "2022",
       title: "Започна от едно усещане…",
-      body: "Тръгнах от 0 — без капитал, без опит, без аудитория. Само с убеждение, че онлайн има начин.",
+      body: "Тръгнах от 0, без капитал, без опит, без аудитория. Само с убеждение, че онлайн има начин.",
       photos: [
         { src: "/speaker/p1.webp", rot: -4, top: 0, left: 20, w: 340 },
         { src: "/speaker/p2.webp", rot: 6, top: 200, left: 280, w: 220 },
@@ -354,7 +462,9 @@ function SpeakerTimeline({ onOpen }: { onOpen: () => void }) {
       title: "След години опит…",
       body: "Открих модел, който позволява на обикновени хора да изградят печеливш AI бизнес само за няколко часа на ден. Това е, което ще покажа на живо.",
       photos: [
-        { src: "/hero-venelin.png", rot: 4, top: 0, left: 20, w: 360 },
+        { src: "/speaker/today-1.webp", rot: -5, top: 20, left: 20, w: 240 },
+        { src: "/speaker/today-2.webp", rot: 4, top: 0, left: 200, w: 260 },
+        { src: "/speaker/today-3.webp", rot: -3, top: 220, left: 110, w: 250 },
       ],
     },
   ];
@@ -388,7 +498,7 @@ function SpeakerTimeline({ onOpen }: { onOpen: () => void }) {
   }, []);
 
   return (
-    <section className="speaker-timeline" style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+    <section className="speaker-timeline" style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
       <div style={{ textAlign: "center", marginBottom: 56 }}>
         <Eyebrow>Защо да ме слушаш</Eyebrow>
         <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
@@ -442,7 +552,7 @@ function SpeakerTimeline({ onOpen }: { onOpen: () => void }) {
         <h3 className="speaker-banner__title">ЗАПАЗИ МЯСТОТО СИ ПО-ДОЛУ</h3>
         <p className="speaker-banner__sub">Ще получиш потвърждение изпратено на имейла ти.</p>
         <div className="speaker-banner__cta">
-          <ScrollToFormCTA onOpen={onOpen} />
+          <ScrollToFormCTA onOpen={onOpen} fullWidth />
         </div>
       </div>
     </section>
@@ -463,7 +573,7 @@ function ProblemSection() {
       ),
     },
     {
-      headline: "Повече термини, не повече пари",
+      headline: "Повече теория отколкото практика",
       body: "Започвал си курсове, гледал си видеа. В края знаеш по-малко, не повече.",
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -496,7 +606,7 @@ function ProblemSection() {
       ),
     },
     {
-      headline: "Не искаш фалшива агенция",
+      headline: "Писна ти от гурута",
       body: "Която обещава, не доставя, пали клиентите си за 2 месеца.",
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -517,25 +627,27 @@ function ProblemSection() {
     },
   ];
   return (
-    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+    <section style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
       <div style={{ textAlign: "center", marginBottom: 56 }}>
         <Eyebrow>Познато ли ти е?</Eyebrow>
         <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
-          Опитваш всичко, но<br />нищо не задържа
+          Опитваш всичко, но<br />нищо не се получава
         </h2>
       </div>
       <div className="problem-grid" style={{ maxWidth: 1100, margin: "0 auto" }}>
         {items.map((it, i) => (
-          <GlowCard key={i} interactive style={{ padding: "26px 24px", display: "flex", flexDirection: "column", gap: 14 }}>
-            <span aria-hidden style={{ width: 48, height: 48, borderRadius: 12, background: `linear-gradient(135deg, rgba(123,47,190,0.32), rgba(85,43,105,0.45))`, border: `1px solid ${COLOR.purple800}`, color: COLOR.purple100, display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-              <span style={{ width: 24, height: 24, display: "block" }}>{it.icon}</span>
+          <GlowCard key={i} interactive className="problem-card">
+            <span aria-hidden className="problem-icon" style={{ borderRadius: 12, background: `linear-gradient(135deg, rgba(168,108,224,0.55), rgba(118,64,178,0.6))`, border: `1px solid rgba(196,155,217,0.45)`, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -8px 16px rgba(0,0,0,0.18)", color: COLOR.purple100, display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <span className="problem-icon-svg" style={{ display: "block" }}>{it.icon}</span>
             </span>
-            <h3 className="font-alfabet-black" style={{ fontSize: "clamp(16px, 2.2vw, 19px)", color: COLOR.fg, lineHeight: 1.25, letterSpacing: "-0.01em", margin: 0 }}>
-              {it.headline}
-            </h3>
-            <p style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14, lineHeight: 1.55 }}>
-              {it.body}
-            </p>
+            <div className="problem-text">
+              <h3 className="font-alfabet-black problem-headline" style={{ color: COLOR.fg, lineHeight: 1.25, letterSpacing: "-0.01em", margin: 0 }}>
+                {it.headline}
+              </h3>
+              <p className="problem-body" style={{ margin: 0, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", lineHeight: 1.55 }}>
+                {it.body}
+              </p>
+            </div>
           </GlowCard>
         ))}
       </div>
@@ -547,8 +659,8 @@ function BenefitsSection() {
   const items = [
     {
       n: "1",
-      title: "Ще разбереш AI ad системата",
-      body: "Не теория. Реалната схема, по която обикновени хора правят €5K–€20K на месец, обслужвайки малки бизнеси с AI реклами. Стъпка по стъпка, без вода.",
+      title: "Ще разбереш AI AD системата",
+      body: "Не теория. Реалната схема, по която обикновени хора правят €5K–€20K на месец, обслужвайки малки бизнеси с AI реклами. Стъпка по стъпка.",
     },
     {
       n: "2",
@@ -557,20 +669,19 @@ function BenefitsSection() {
     },
     {
       n: "3",
-      title: "Ще научиш как да задържиш клиента",
-      body: "За да плаща €1500–€5000 на месец без да се пазари. Какво обещаваш, какво доставяш и какво НЕ обещаваш.",
+      title: "Ще се научиш как да правиш реклами с AI",
+      body: "Практическо умение как можеш да правиш стотици реклами, от които бизнесите имат нужда на автопилот с AI.",
     },
   ];
   return (
-    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+    <section id="benefits" style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)", scrollMarginTop: 32 }}>
       <div style={{ textAlign: "center", maxWidth: 1100, margin: "0 auto", marginBottom: 56 }}>
         <Eyebrow>Вътре в безплатното обучение</Eyebrow>
-        <h2 style={{ fontFamily: "Manrope, sans-serif", fontWeight: 700, fontSize: "clamp(20px, 2.4vw, 32px)", color: COLOR.fg, marginTop: 18, lineHeight: 1.25, letterSpacing: "-0.02em", maxWidth: 1100, marginLeft: "auto", marginRight: "auto" }}>
-          Системата, която превръща AI в реален доход,<br />
-          а не просто в още една отворена страница в Google.
+        <h2 style={{ fontFamily: "Manrope, sans-serif", fontWeight: 700, fontSize: "clamp(25px, 3.4vw, 42px)", color: COLOR.fg, marginTop: 18, lineHeight: 1.2, letterSpacing: "-0.02em", maxWidth: 1100, marginLeft: "auto", marginRight: "auto", textWrap: "balance" }}>
+          Системата, която превръща AI в реален доход, а не просто още едно безполезно умение.
         </h2>
       </div>
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "clamp(12px, 2vw, 22px)" }}>
         {items.map((it) => (
           <div key={it.n} style={{ position: "relative", borderRadius: 16, overflow: "hidden", padding: 32, background: "rgba(255,255,255,0.002)", border: "1px solid rgba(255,255,255,0.30)", boxShadow: CARD_INNER_GLOW, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <div
@@ -595,9 +706,10 @@ function BenefitsSection() {
               0{it.n}
             </div>
             <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "Manrope, sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: COLOR.purple100 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, fontFamily: "Manrope, sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: COLOR.purple100 }}>
                 <span style={{ width: 18, height: 1, background: COLOR.purple100 }} aria-hidden />
                 Стъпка 0{it.n}
+                <span style={{ width: 18, height: 1, background: COLOR.purple100 }} aria-hidden />
               </div>
               <h3 className="font-alfabet-bold" style={{ fontSize: "clamp(19px, 1.7vw, 23px)", lineHeight: 1.2, color: COLOR.fg, margin: 0 }}>
                 {it.title}
@@ -609,36 +721,109 @@ function BenefitsSection() {
           </div>
         ))}
       </div>
-      <div style={{ marginTop: 36, display: "flex", justifyContent: "center" }}>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "10px 20px", borderRadius: 999, border: `1px solid ${COLOR.purple800}`, background: "rgba(85,43,105,0.18)", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: 14, fontWeight: 600 }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: COLOR.purple100, boxShadow: `0 0 10px ${COLOR.purple100}` }} aria-hidden />
-          Бонус: Ще пусна реална кампания от 0 пред теб на живо
+      <div style={{ marginTop: 24, maxWidth: 1100, marginLeft: "auto", marginRight: "auto" }}>
+        <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px", borderRadius: 999, border: `1px solid ${COLOR.purple800}`, background: "rgba(85,43,105,0.18)", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: "clamp(12px, 2.2vw, 16px)", fontWeight: 600, width: "100%", textAlign: "center", lineHeight: 1.35 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: COLOR.purple100, boxShadow: `0 0 10px ${COLOR.purple100}`, flexShrink: 0 }} aria-hidden />
+          Бонус: ресурси, които ще можеш да вземеш на обучението
         </span>
       </div>
     </section>
   );
 }
 
+function CountUp({ target, prefix = "", suffix = "", decimals = 0, durationMs = 1600 }: { target: number; prefix?: string; suffix?: string; decimals?: number; durationMs?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [val, setVal] = useState(0);
+  const startedRef = useRef(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) { setVal(target); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !startedRef.current) {
+          startedRef.current = true;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const p = Math.min(1, (now - start) / durationMs);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setVal(target * eased);
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(node);
+    return () => io.disconnect();
+  }, [target, durationMs]);
+  const formatted = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toLocaleString("bg-BG");
+  return <span ref={ref}>{prefix}{formatted}{suffix}</span>;
+}
+
 function CredentialsStrip() {
   // NOTE: example numbers — replace with real metrics
-  const items = [
-    { big: "€1.2M+", label: "Генерирани в реклами за клиенти" },
-    { big: "240+", label: "Менторанти преминали през системата" },
-    { big: "80+", label: "Активни кампании в момента" },
-    { big: "5+", label: "Години в paid ads" },
+  const items: { target: number; prefix?: string; suffix?: string; decimals?: number; label: string; icon: React.ReactNode }[] = [
+    {
+      target: 1.2, prefix: "€", suffix: "M+", decimals: 1, label: "Генерирани в реклами за клиенти",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M3 17l6-6 4 4 8-8" /><path d="M14 7h7v7" />
+        </svg>
+      ),
+    },
+    {
+      target: 240, suffix: "+", label: "Студенти преминали през системата",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" /><circle cx="10" cy="7" r="4" /><path d="M21 21v-2a4 4 0 0 0-3-3.87" /><path d="M17 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      ),
+    },
+    {
+      target: 80, suffix: "+", label: "Активни кампании в момента",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M3 11l18-8-8 18-2-8-8-2z" />
+        </svg>
+      ),
+    },
+    {
+      target: 5, suffix: "+", label: "Години в paid ads",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <circle cx="12" cy="12" r="9" /><polyline points="12 7 12 12 15 14" />
+        </svg>
+      ),
+    },
   ];
   return (
-    <section style={{ padding: "clamp(40px, 6vw, 80px) clamp(16px, 4vw, 32px)" }}>
-      <div style={{ textAlign: "center", marginBottom: 40 }}>
+    <section
+      style={{
+        position: "relative",
+        padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)",
+        background: "rgba(255,255,255,0.002)",
+        borderTop: "1px solid rgba(196,155,217,0.45)",
+        borderBottom: "1px solid rgba(196,155,217,0.45)",
+        boxShadow: CARD_INNER_GLOW,
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ textAlign: "center", marginBottom: 36, position: "relative" }}>
         <Eyebrow>Цифрите зад системата</Eyebrow>
       </div>
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
-        {items.map((it) => (
-          <div key={it.label} style={{ padding: "26px 18px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)", textAlign: "center", display: "flex", flexDirection: "column", gap: 8 }}>
-            <span className="font-alfabet-black" style={{ fontSize: "clamp(34px, 5vw, 48px)", color: COLOR.fg, letterSpacing: "-0.02em", lineHeight: 1 }}>
-              {it.big}
+      <div className="credentials-grid" style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
+        {items.map((it, idx) => (
+          <div key={it.label} className="credentials-item" style={{ padding: "12px 24px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
+            <span aria-hidden style={{ color: COLOR.purple100, opacity: 0.7, display: "inline-flex" }}>
+              <span style={{ width: 22, height: 22, display: "block" }}>{it.icon}</span>
             </span>
-            <span style={{ fontSize: 12, fontFamily: "Manrope, sans-serif", color: COLOR.fgMuted, lineHeight: 1.5, letterSpacing: "0.02em" }}>
+            <span className="font-alfabet-black" style={{ fontSize: "clamp(40px, 9vw, 84px)", color: COLOR.fg, letterSpacing: "-0.04em", lineHeight: 0.95, background: "linear-gradient(180deg, #FFFFFF 0%, #C49BD9 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", whiteSpace: "nowrap" }}>
+              <CountUp target={it.target} prefix={it.prefix} suffix={it.suffix} decimals={it.decimals} />
+            </span>
+            <span style={{ fontSize: 15.5, fontFamily: "Manrope, sans-serif", color: COLOR.fgMuted, lineHeight: 1.45, letterSpacing: "0.01em", maxWidth: 200 }}>
               {it.label}
             </span>
           </div>
@@ -650,11 +835,11 @@ function CredentialsStrip() {
 
 function SuitabilitySection() {
   const oldItems = [
-    "€3K–€5K минимум, само за да започнеш да тестваш продукти",
-    "6–12 месеца преди да върнеш първото си евро, ако изобщо стигнеш дотам",
-    "Пренаситени пазари — всеки „печеливш продукт“ вече има 500 копия",
+    "€3K–€5K само за да започнеш да тестваш, без гаранция за резултат",
+    "6–12 месеца преди да видиш първото евро, ако изобщо стигнеш дотам",
+    "Пренаситени пазари. Всеки „печеливш продукт“ вече има 500 копия",
     "Влизаш в директна битка с хора, започнали преди 10 години",
-    "Една промяна в алгоритъма може да срине всичко за една нощ",
+    "Една промяна в алгоритъма и всичко се срива за една нощ",
   ];
   const newItems = [
     "Първият клиент е възможен още в първите 30 дни",
@@ -717,15 +902,14 @@ function SuitabilitySection() {
   };
 
   return (
-    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
-      <div style={{ textAlign: "center", maxWidth: 920, margin: "0 auto", marginBottom: 56 }}>
+    <section style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ textAlign: "center", maxWidth: 920, margin: "0 auto", marginBottom: 28 }}>
         <Eyebrow>Ако си като повечето хора, които попадат на тази страница…</Eyebrow>
-        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(22px, 3.6vw, 38px)", color: COLOR.fg, marginTop: 18, lineHeight: 1.18, letterSpacing: "0", textTransform: "uppercase" }}>
-          Не си изостанал. Не си бил без късмет.<br />
-          Просто са ти продали грешната възможност.
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(22px, 4.2vw, 42px)", color: COLOR.fg, marginTop: 18, lineHeight: 1.18, letterSpacing: "0", textTransform: "uppercase", textWrap: "balance" }}>
+          Не си изостанал. Не си бил без късмет. Просто са ти продали грешната възможност.
         </h2>
         <p style={{ marginTop: 22, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: "clamp(14px, 2vw, 16px)", lineHeight: 1.65, maxWidth: 760, marginLeft: "auto", marginRight: "auto" }}>
-          Дропшипинг. Amazon FBA. SMM агенции. Crypto bots. Faceless YouTube. Всяко едно от тези „усвои“ пари, които нямаш. Време, което не можеш да си върнеш. AI рекламите обръщат играта — изпреварваш хора с години опит, защото теренът беше изчистен от нула.
+          Дропшипинг. Amazon FBA. SMM агенции. Crypto. Faceless YouTube. Всяко едно от тях просто не е построено за начинаещи. AI рекламите обръщат играта. Влизаш на терен, изчистен от нула, и изпреварваш хора с години опит.
         </p>
       </div>
 
@@ -750,7 +934,7 @@ function SuitabilitySection() {
         <GlowCard style={{ padding: "30px 28px", display: "flex", flexDirection: "column", gap: 18 }}>
           <span style={{ ...cardEyebrow, color: COLOR.purple100 }}>Защо AI рекламите са различни</span>
           <h3 className="font-alfabet-black" style={{ fontSize: "clamp(18px, 2.4vw, 22px)", color: COLOR.fg, lineHeight: 1.3, letterSpacing: "-0.01em", margin: 0, textAlign: "center" }}>
-            Системата, която превръща AI в реален доход, а не в поредното отворено tab-че
+            Системата, която превръща AI в реален доход, не в поредното отворено tab-че
           </h3>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
             {newItems.map((t, i) => (
@@ -767,24 +951,67 @@ function SuitabilitySection() {
 }
 
 function TestimonialsSection() {
-  // NOTE: example placeholder cards — replace with real client video testimonials
-  const items = [
-    { duration: "1:24", caption: "Първи клиент за 9 дни — €1,800/мес" },
-    { duration: "2:08", caption: "От 0 до €4,500/мес за 6 седмици" },
-    { duration: "1:42", caption: "Напуснах работа след 3-я клиент" },
-    { duration: "1:55", caption: "€7,200 в първия месец след старта" },
+  const videos = [
+    { src: "https://player.vimeo.com/video/1184769287?h=e9fb6898ef&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479", title: "Testimonials Viktor" },
+    { src: "https://player.vimeo.com/video/1184769055?h=1bc7cd923d&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479", title: "Testimonial 2 - Cristian" },
+  ];
+  const photos = [
+    { rot: -5, label: "€7,200 / мес" },
+    { rot: 3, label: "Напуснах работа" },
+    { rot: -3, label: "€4,500 / 6 седмици" },
   ];
   return (
-    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+    <section style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
       <div style={{ textAlign: "center", marginBottom: 48 }}>
         <Eyebrow>Реални резултати</Eyebrow>
         <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
           Какво постигат хора,<br />които вече работят по системата
         </h2>
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 18, maxWidth: 1100, margin: "0 auto" }}>
-        {items.map((it, i) => (
-          <TestimonialCard9x16 key={i} duration={it.duration} caption={it.caption} />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "clamp(12px, 2vw, 20px)", maxWidth: 560, margin: "0 auto 32px" }}>
+        {videos.map((v, i) => (
+          <div
+            key={i}
+            style={{
+              position: "relative",
+              width: "100%",
+              aspectRatio: "9 / 16",
+              borderRadius: 14,
+              overflow: "hidden",
+              border: "1px solid rgba(196,155,217,0.35)",
+              boxShadow: CARD_INNER_GLOW + ", 0 8px 24px rgba(0,0,0,0.4)",
+              background: "#0f0a1a",
+            }}
+          >
+            <iframe
+              src={v.src}
+              title={v.title}
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="testi-photos" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "clamp(8px, 2vw, 18px)", maxWidth: 900, margin: "0 auto", padding: "0 4px" }}>
+        {photos.map((p, i) => (
+          <div
+            key={i}
+            style={{
+              position: "relative",
+              aspectRatio: "4 / 5",
+              borderRadius: 14,
+              overflow: "hidden",
+              border: "1px solid rgba(196,155,217,0.35)",
+              boxShadow: CARD_INNER_GLOW + ", 0 8px 24px rgba(0,0,0,0.3)",
+              background: "linear-gradient(160deg, rgba(123,47,190,0.18) 0%, rgba(30,18,52,0.6) 100%)",
+              transform: `rotate(${p.rot}deg)`,
+            }}
+          >
+            <div style={{ position: "absolute", left: 12, bottom: 12, right: 12, fontFamily: "Manrope, sans-serif", fontSize: 12, fontWeight: 700, color: "#fff", letterSpacing: "0.02em", textShadow: "0 1px 6px rgba(0,0,0,0.7)" }}>
+              {p.label}
+            </div>
+          </div>
         ))}
       </div>
     </section>
@@ -814,14 +1041,14 @@ function FAQSection() {
       a: "Накрая ще представя как можеш да продължиш да работиш с мен. Но дори да вземеш само безплатната част, ще си тръгнеш с конкретен план. Никой не те задължава.",
     },
     {
-      q: "Кога получавам линка за Google Meet?",
+      q: "Кога получавам линка за Zoom?",
       a: "Мигновен достъп — линкът пристига на имейла ти веднага след регистрация. Напомняне 1 час преди старта. Ако не го виждаш, провери „Промоции“ или „Спам“.",
     },
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section style={{ padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
+    <section style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)" }}>
+      <div style={{ textAlign: "center", marginBottom: 40 }}>
         <Eyebrow>ЧЗВ</Eyebrow>
         <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
           Често задавани въпроси
@@ -831,23 +1058,42 @@ function FAQSection() {
         {items.map((it, i) => {
           const isOpen = open === i;
           return (
-            <div key={i} style={{ borderRadius: 14, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)", overflow: "hidden" }}>
+            <div key={i} style={{ position: "relative", borderRadius: 16, border: "1px solid rgba(255,255,255,0.30)", background: "rgba(255,255,255,0.002)", boxShadow: CARD_INNER_GLOW, overflow: "hidden" }}>
               <button
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
-                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "18px 22px", background: "transparent", border: 0, color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: "clamp(15px, 2.2vw, 17px)", fontWeight: 600, textAlign: "left", cursor: "pointer", lineHeight: 1.4 }}
+                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "20px 22px", background: "transparent", border: 0, color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: "clamp(15px, 2.2vw, 17px)", fontWeight: 600, textAlign: "left", cursor: "pointer", lineHeight: 1.4 }}
               >
                 <span>{it.q}</span>
-                <span aria-hidden style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", background: COLOR.pink100, color: COLOR.purple800, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 700, transition: "transform 200ms ease", transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>
+                <span aria-hidden style={{ flexShrink: 0, width: 30, height: 30, borderRadius: "50%", background: isOpen ? "rgba(196,155,217,0.9)" : "rgba(196,155,217,0.18)", border: "1px solid rgba(196,155,217,0.45)", color: isOpen ? COLOR.purple800 : COLOR.purple100, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 700, transition: "transform 220ms ease, background 220ms ease, color 220ms ease", transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>
                   +
                 </span>
               </button>
-              {isOpen && (
-                <div style={{ padding: "0 22px 22px", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: 14.5, lineHeight: 1.6 }}>
-                  {it.a}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateRows: isOpen ? "1fr" : "0fr",
+                  transition: "grid-template-rows 320ms cubic-bezier(0.4, 0, 0.2, 1)",
+                }}
+              >
+                <div style={{ overflow: "hidden" }}>
+                  <div
+                    style={{
+                      padding: "0 22px 22px",
+                      color: COLOR.fgMuted,
+                      fontFamily: "Manrope, sans-serif",
+                      fontSize: 15,
+                      lineHeight: 1.65,
+                      opacity: isOpen ? 1 : 0,
+                      transform: isOpen ? "translateY(0)" : "translateY(-4px)",
+                      transition: "opacity 240ms ease 60ms, transform 280ms cubic-bezier(0.4, 0, 0.2, 1)",
+                    }}
+                  >
+                    {it.a}
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           );
         })}
@@ -875,29 +1121,39 @@ function CountdownSection({ onOpen }: { onOpen: () => void }) {
     { val: secs, label: "СЕКУНДИ" },
   ];
   return (
-    <section style={{ padding: "clamp(56px, 9vw, 110px) clamp(16px, 4vw, 32px)" }}>
-      <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+    <section
+      style={{
+        position: "relative",
+        padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)",
+        background: "rgba(255,255,255,0.002)",
+        borderTop: "1px solid rgba(196,155,217,0.45)",
+        borderBottom: "1px solid rgba(196,155,217,0.45)",
+        boxShadow: CARD_INNER_GLOW,
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center", position: "relative" }}>
         <Eyebrow>Последен шанс</Eyebrow>
-        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(28px, 5vw, 48px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+        <h2 className="font-alfabet-black" style={{ fontSize: "clamp(30px, 5.4vw, 52px)", color: COLOR.fg, marginTop: 16, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
           Местата свършват
         </h2>
-        <p style={{ marginTop: 16, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: "clamp(14px, 2vw, 16px)", lineHeight: 1.55, maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
+        <p style={{ marginTop: 16, color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontSize: "clamp(14px, 2vw, 16px)", lineHeight: 1.55, maxWidth: 520, marginLeft: "auto", marginRight: "auto", textWrap: "balance" }}>
           Регистрацията е безплатна, но местата са лимитирани. След {EVENT_DATE_LABEL} линкът изчезва.
         </p>
-        <div style={{ marginTop: 36, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "clamp(8px, 2vw, 16px)", maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
+        <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0, maxWidth: 380, marginLeft: "auto", marginRight: "auto" }}>
           {blocks.map((b) => (
-            <div key={b.label} style={{ padding: "18px 8px", borderRadius: 14, border: `1px solid ${COLOR.purple800}`, background: "rgba(85,43,105,0.18)", display: "flex", flexDirection: "column", gap: 4, alignItems: "center" }}>
-              <span className="font-alfabet-black" style={{ fontSize: "clamp(28px, 6vw, 44px)", color: COLOR.fg, lineHeight: 1, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.02em" }}>
+            <div key={b.label} style={{ padding: "12px 4px", display: "flex", flexDirection: "column", gap: 6, alignItems: "center" }}>
+              <span className="font-alfabet-black" style={{ fontSize: "clamp(32px, 7vw, 52px)", color: COLOR.fg, lineHeight: 1, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.03em", background: "linear-gradient(180deg, #FFFFFF 0%, #C49BD9 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 {String(b.val).padStart(2, "0")}
               </span>
-              <span style={{ fontSize: 11, letterSpacing: "0.14em", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontWeight: 600 }}>
+              <span style={{ fontSize: 10.5, letterSpacing: "0.16em", color: "rgba(196,155,217,0.85)", fontFamily: "Manrope, sans-serif", fontWeight: 700, textTransform: "uppercase" }}>
                 {b.label}
               </span>
             </div>
           ))}
         </div>
-        <div style={{ marginTop: 40, display: "flex", justifyContent: "center" }}>
-          <ScrollToFormCTA onOpen={onOpen} />
+        <div style={{ marginTop: 40, maxWidth: 380, marginLeft: "auto", marginRight: "auto" }}>
+          <ScrollToFormCTA onOpen={onOpen} fullWidth />
         </div>
       </div>
     </section>
@@ -960,6 +1216,37 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
     // TODO: wire to /api/optin once tracking is set up.
     await new Promise((r) => setTimeout(r, 600));
     setStatus("success");
+    // Confetti burst
+    try {
+      const confetti = (await import("canvas-confetti")).default;
+      const colors = ["#34D399", "#10B981", "#A86CE0", "#C49BD9", "#FFFFFF"];
+      const fire = (originX: number) => {
+        confetti({
+          particleCount: 70,
+          spread: 70,
+          startVelocity: 45,
+          origin: { x: originX, y: 0.5 },
+          colors,
+          zIndex: 9999,
+          scalar: 0.95,
+        });
+      };
+      fire(0.2);
+      fire(0.8);
+      setTimeout(() => {
+        confetti({
+          particleCount: 120,
+          spread: 100,
+          startVelocity: 35,
+          origin: { x: 0.5, y: 0.4 },
+          colors,
+          zIndex: 9999,
+          scalar: 1.1,
+        });
+      }, 180);
+    } catch {
+      // confetti is optional eye-candy — never block the flow
+    }
   };
 
   if (!open) return null;
@@ -972,15 +1259,25 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
         </svg>
       </button>
       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-        <span className="modal-eyebrow">{status === "success" ? "Готово" : "Безплатно обучение"}</span>
-        <h3 id="modal-title" className="font-alfabet-bold" style={{ fontSize: "clamp(24px, 3vw, 30px)", textAlign: "center", marginBottom: 18, lineHeight: 1.15, letterSpacing: "-0.01em", textTransform: status === "success" ? "none" : "uppercase", color: COLOR.fg }}>
-          {status === "success" ? "Записах те!" : "Запази мястото си"}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 999, background: "rgba(16,185,129,0.15)", border: "1px solid rgba(52,211,153,0.5)", fontFamily: "Manrope, sans-serif", fontSize: 11, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#34D399" }}>
+            <span aria-hidden style={{ width: 7, height: 7, borderRadius: "50%", background: "#34D399", boxShadow: "0 0 8px rgba(52,211,153,0.8)" }} />
+            {status === "success" ? "Готово" : "Регистрация"}
+          </span>
+        </div>
+        <h3 id="modal-title" className="font-alfabet-bold" style={{ fontSize: "clamp(22px, 3vw, 28px)", textAlign: "center", marginBottom: status === "success" ? 18 : 8, lineHeight: 1.2, letterSpacing: "-0.01em", color: COLOR.fg }}>
+          {status === "success" ? "Записах те!" : "Запази си място безплатно"}
         </h3>
+        {status !== "success" && (
+          <p style={{ textAlign: "center", margin: "0 0 22px", fontFamily: "Manrope, sans-serif", fontSize: 13.5, color: COLOR.fgMuted, lineHeight: 1.5 }}>
+            {EVENT_DATE_LABEL} · {EVENT_TIME_LABEL} · На живо в Zoom
+          </p>
+        )}
 
         {status === "success" ? (
           <div style={{ color: COLOR.fgMuted, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
             <p style={{ margin: 0, lineHeight: 1.55, fontFamily: "Manrope, sans-serif" }}>
-              ✓ Провери имейла си в следващите <strong style={{ color: COLOR.fg }}>60 секунди</strong> — линкът за Google Meet идва веднага. Ако не го виждаш, провери „Промоции“ или „Спам“.
+              ✓ Провери имейла си в следващите <strong style={{ color: COLOR.fg }}>60 секунди</strong> — линкът за Zoom идва веднага. Ако не го виждаш, провери „Промоции“ или „Спам“.
             </p>
             <button type="button" onClick={onClose} className="optin-submit" style={{ maxWidth: 200 }}>Затвори</button>
           </div>
@@ -988,7 +1285,7 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
           <form onSubmit={submit} noValidate style={{ display: "flex", flexDirection: "column", alignItems: "stretch", gap: 12, width: "100%" }}>
             {/* Name */}
             <div style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "stretch", width: "100%" }}>
-              <label htmlFor="optin-name" style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontWeight: 600, textAlign: "center", display: "block", width: "100%" }}>
+              <label htmlFor="optin-name" style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontWeight: 700, textAlign: "left", display: "block", width: "100%" }}>
                 Име
               </label>
               <div className={`field-shell${errors.name ? " is-error" : ""}`}>
@@ -999,7 +1296,7 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
                   value={name}
                   onChange={(e) => { setName(e.target.value); if (errors.name) setErrors((p) => ({ ...p, name: undefined })); }}
                   autoComplete="given-name"
-                  placeholder="Име и фамилия"
+                  placeholder="Твоето име"
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? "optin-name-err" : undefined}
                   className="field-input"
@@ -1010,8 +1307,8 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
 
             {/* Email */}
             <div style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "stretch", width: "100%" }}>
-              <label htmlFor="optin-email" style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontWeight: 600, textAlign: "center", display: "block", width: "100%" }}>
-                Имейл
+              <label htmlFor="optin-email" style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontWeight: 700, textAlign: "left", display: "block", width: "100%" }}>
+                Email
               </label>
               <div className={`field-shell${errors.email ? " is-error" : ""}`}>
                 <input
@@ -1021,7 +1318,7 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors((p) => ({ ...p, email: undefined })); }}
                   autoComplete="email"
-                  placeholder="example@email.com"
+                  placeholder="ime@example.com"
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? "optin-email-err" : undefined}
                   className="field-input"
@@ -1032,8 +1329,8 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
 
             {/* Phone */}
             <div style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "stretch", width: "100%" }}>
-              <label htmlFor="optin-phone" style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontWeight: 600, textAlign: "center", display: "block", width: "100%" }}>
-                Телефон
+              <label htmlFor="optin-phone" style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: COLOR.fgMuted, fontFamily: "Manrope, sans-serif", fontWeight: 700, textAlign: "left", display: "block", width: "100%" }}>
+                Телефон (за SMS напомняне)
               </label>
               <div className={`field-shell${errors.phone ? " is-error" : ""}`}>
                 <span className="field-prefix" aria-hidden>
@@ -1080,36 +1377,9 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
               className="optin-submit"
               style={{ marginTop: 4, opacity: status === "loading" ? 0.7 : 1, cursor: status === "loading" ? "wait" : "pointer" }}
             >
-              {status === "loading" ? "Изпращаме…" : <>Запази безплатно място&nbsp;→</>}
+              {status === "loading" ? "Изпращаме…" : <>Запиши ме в Zoom-а&nbsp;→</>}
             </button>
 
-            <ul style={{
-              margin: "4px 0 0",
-              padding: 0,
-              listStyle: "none",
-              fontSize: 12,
-              lineHeight: 1.5,
-              color: COLOR.fgMuted,
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              justifyItems: "start",
-              alignItems: "start",
-              columnGap: 12,
-              rowGap: 8,
-              textAlign: "left",
-              maxWidth: 360,
-              marginInline: "auto",
-              fontFamily: "Manrope, sans-serif",
-            }}>
-              {["100% безплатно", "Мигновен достъп", "Без кредитна карта", "Линк за Google Meet"].map((t, i) => (
-                <li key={i} style={{ display: "inline-flex", alignItems: "flex-start", gap: 6 }}>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={COLOR.purple100} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    <path d="M5 12l5 5L20 7" />
-                  </svg>
-                  {t}
-                </li>
-              ))}
-            </ul>
             <p style={{ margin: "6px auto 0", fontSize: 11, lineHeight: 1.5, color: COLOR.fgMuted, textAlign: "center", opacity: 0.75, fontFamily: "Manrope, sans-serif" }}>
               С натискането на бутона приемаш{" "}
               <a href="https://aibrandscale.io/privacy" target="_blank" rel="noopener noreferrer" style={{ color: COLOR.fg, textDecoration: "underline", whiteSpace: "nowrap" }}>политиката за поверителност</a>.
@@ -1123,15 +1393,71 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
 
 function Footer() {
   return (
-    <footer style={{ borderTop: "1px solid rgba(255,255,255,0.06)", padding: "clamp(32px, 5vw, 56px) clamp(16px, 4vw, 32px)", textAlign: "center" }}>
-      <div style={{ maxWidth: 800, margin: "0 auto" }}>
-        <p style={{ fontSize: 12, color: COLOR.fgDim, fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
-          Този сайт не е свързан с Meta™, Facebook™ или Instagram™. Всички права запазени.
+    <footer
+      style={{
+        position: "relative",
+        padding: "clamp(64px, 9vw, 100px) clamp(16px, 4vw, 32px) clamp(36px, 5vw, 56px)",
+        textAlign: "center",
+        overflow: "hidden",
+      }}
+    >
+      {/* Lamp — thin horizontal beam line full-width */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 1,
+          background: "linear-gradient(90deg, transparent 0%, rgba(196,155,217,0.35) 25%, rgba(196,155,217,0.55) 50%, rgba(196,155,217,0.35) 75%, transparent 100%)",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Lamp glow downward — wide elliptical wash beneath the line */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "min(680px, 90%)",
+          height: 320,
+          background: "radial-gradient(ellipse 50% 50% at center top, rgba(196,155,217,0.55) 0%, rgba(168,108,224,0.28) 22%, rgba(123,47,190,0.12) 45%, transparent 75%)",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Bulb hot spot — bright glow at line center */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: -10,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 220,
+          height: 22,
+          background: "radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, rgba(232,200,245,0.6) 30%, transparent 70%)",
+          filter: "blur(3px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div style={{ maxWidth: 920, margin: "0 auto", position: "relative" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 18, marginBottom: 18 }}>
+          <a href="https://aibrandscale.io/privacy" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Manrope, sans-serif", fontSize: 14, fontWeight: 500, color: COLOR.fg, textDecoration: "none", letterSpacing: "0.01em" }}>
+            Privacy Policy
+          </a>
+          <span aria-hidden style={{ width: 1, height: 16, background: "rgba(196,155,217,0.35)" }} />
+          <a href="https://aibrandscale.io/terms" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Manrope, sans-serif", fontSize: 14, fontWeight: 500, color: COLOR.fg, textDecoration: "none", letterSpacing: "0.01em" }}>
+            Terms &amp; Conditions
+          </a>
+        </div>
+        <p style={{ margin: 0, fontSize: 12.5, color: COLOR.fgDim, fontFamily: "Manrope, sans-serif", lineHeight: 1.65, maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
+          Този сайт не е част от Facebook или Meta Platforms, Inc. FACEBOOK е регистрирана търговска марка на Meta Platforms, Inc.
         </p>
-        <p style={{ marginTop: 12, fontSize: 12, color: COLOR.fgDim, fontFamily: "Manrope, sans-serif" }}>
-          © {new Date().getFullYear()} AI Brand Scale ·{" "}
-          <a href="https://aibrandscale.io/privacy" style={{ color: COLOR.fgMuted, textDecoration: "underline" }}>Privacy</a>{" · "}
-          <a href="https://aibrandscale.io/terms" style={{ color: COLOR.fgMuted, textDecoration: "underline" }}>Terms</a>
+        <p style={{ marginTop: 22, marginBottom: 0, fontSize: 12, color: COLOR.fgDim, fontFamily: "Manrope, sans-serif", letterSpacing: "0.02em" }}>
+          © {new Date().getFullYear()} aibrandscale.io
         </p>
       </div>
     </footer>
@@ -1146,10 +1472,10 @@ export default function Page() {
   const close = () => setModalOpen(false);
   return (
     <>
-      <PurpleAlertNav text={`ОНЛАЙН ОБУЧЕНИЕ НА ЖИВО · ${EVENT_DATE_LABEL.toUpperCase()} · ${EVENT_TIME_LABEL}`} />
+      <PurpleAlertNav text={`${EVENT_DATE_LABEL} · ${EVENT_TIME_LABEL}`} extraLabel="Безплатно обучение" />
       <main className="overflow-x-hidden w-full">
         <Hero onOpen={open} />
-        <BrandsStrip onOpen={open} />
+        <BrandsStrip />
         <ProblemSection />
         <BenefitsSection />
         <EventDetails onOpen={open} />
