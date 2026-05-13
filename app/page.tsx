@@ -302,13 +302,36 @@ function BrandsStrip() {
     { src: "/brands/logo5.webp", h: 72 },
   ];
   const items = [...logos, ...logos];
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const node = trackRef.current;
+    if (!node) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    let raf = 0;
+    let last = performance.now();
+    let x = 0;
+    const speed = 60; // px / second
+    const half = () => node.scrollWidth / 2;
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000;
+      last = now;
+      x -= speed * dt;
+      const h = half();
+      if (h > 0 && Math.abs(x) >= h) x += h;
+      node.style.transform = `translate3d(${x}px, 0, 0)`;
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
   return (
     <section style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)", textAlign: "center" }}>
       <div style={{ marginBottom: 28 }}>
         <Eyebrow>Бизнеси и инфлуенсъри,<br />които ми се довериха</Eyebrow>
       </div>
       <div className="logo-ticker">
-        <div className="logo-ticker__track">
+        <div ref={trackRef} className="logo-ticker__track logo-ticker__track--js">
           {items.map((logo, i) => (
             <span key={i} className="logo-ticker__item" style={{ height: logo.h }} aria-hidden={i >= logos.length}>
               <Image

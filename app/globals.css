@@ -467,6 +467,11 @@ input, textarea {
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
 }
+/* When JS drives the animation, disable the CSS keyframes */
+.logo-ticker__track--js {
+  animation: none !important;
+  -webkit-animation: none !important;
+}
 @media (hover: hover) and (pointer: fine) {
   .logo-ticker:hover .logo-ticker__track { animation-play-state: paused; }
 }
