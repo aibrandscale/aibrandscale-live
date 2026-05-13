@@ -301,54 +301,45 @@ function BrandsStrip() {
     { src: "/brands/logo4.webp", h: 110 },
     { src: "/brands/logo5.webp", h: 72 },
   ];
-  const items = [...logos, ...logos];
+  // Triple the logos so even with a wide viewport we always have content to scroll into view
+  const items = [...logos, ...logos, ...logos];
   const trackRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const node = trackRef.current;
     if (!node) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
 
     let raf = 0;
-    let halfWidth = 0;
+    let cycleWidth = 0;
     const speed = 60; // px / second
-
-    const measure = () => {
-      // scrollWidth covers the duplicated content; half = one set width
-      const w = node.scrollWidth;
-      if (w > 0) halfWidth = w / 2;
-    };
-
-    // Try to measure once images report a size
-    const imgs = Array.from(node.querySelectorAll("img"));
-    let pending = imgs.length;
-    const onImg = () => { pending -= 1; if (pending <= 0) measure(); };
-    imgs.forEach((img) => {
-      if ((img as HTMLImageElement).complete) onImg();
-      else {
-        img.addEventListener("load", onImg, { once: true });
-        img.addEventListener("error", onImg, { once: true });
-      }
-    });
-    // Initial best-effort measure right away (in case scrollWidth is already valid)
-    measure();
-    // Safety net: re-measure on resize and after a short delay
-    const onResize = () => measure();
-    window.addEventListener("resize", onResize);
-    const t1 = window.setTimeout(measure, 250);
-    const t2 = window.setTimeout(measure, 1500);
-
     let last = performance.now();
     let x = 0;
+
+    const measure = () => {
+      // We render 3 copies; one cycle = 1/3 of total scrollWidth
+      const w = node.scrollWidth;
+      if (w > 0) cycleWidth = w / 3;
+    };
+
+    measure();
+
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+    if (ro) ro.observe(node);
+
+    // Belt-and-braces: re-measure periodically until we get a stable non-zero value
+    const interval = window.setInterval(() => {
+      if (cycleWidth === 0) measure();
+      else window.clearInterval(interval);
+    }, 200);
+
     const tick = (now: number) => {
-      const dt = Math.min(0.05, (now - last) / 1000); // clamp to avoid jumps when tab returns
+      const dt = Math.min(0.05, Math.max(0, (now - last) / 1000));
       last = now;
-      if (halfWidth > 0) {
+      if (cycleWidth > 0) {
         x -= speed * dt;
-        if (x <= -halfWidth) x += halfWidth;
+        if (x <= -cycleWidth) x += cycleWidth;
         const tx = `translate3d(${x}px, 0, 0)`;
         node.style.transform = tx;
-        (node.style as CSSStyleDeclaration & { webkitTransform?: string }).webkitTransform = tx;
+        node.style.webkitTransform = tx;
       }
       raf = requestAnimationFrame(tick);
     };
@@ -356,9 +347,8 @@ function BrandsStrip() {
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", onResize);
-      window.clearTimeout(t1);
-      window.clearTimeout(t2);
+      if (ro) ro.disconnect();
+      window.clearInterval(interval);
     };
   }, []);
   return (
@@ -367,16 +357,18 @@ function BrandsStrip() {
         <Eyebrow>Бизнеси и инфлуенсъри,<br />които ми се довериха</Eyebrow>
       </div>
       <div className="logo-ticker">
-        <div ref={trackRef} className="logo-ticker__track logo-ticker__track--js">
+        <div ref={trackRef} className="logo-ticker__track">
           {items.map((logo, i) => (
             <span key={i} className="logo-ticker__item" style={{ height: logo.h }} aria-hidden={i >= logos.length}>
-              <Image
+              {/* Plain <img> on purpose: bypasses next/image wrapper quirks on iOS */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={logo.src}
                 alt={i < logos.length ? `Клиент ${i + 1}` : ""}
-                width={Math.round(logo.h * 3.5)}
                 height={logo.h}
-                style={{ height: logo.h, width: "auto" }}
-                unoptimized
+                style={{ height: logo.h, width: "auto", display: "block" }}
+                loading="lazy"
+                decoding="async"
               />
             </span>
           ))}
