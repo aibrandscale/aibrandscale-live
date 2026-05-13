@@ -8,7 +8,7 @@ function escapeHtml(s: string) {
 }
 
 export function welcomeEmailSubject() {
-  return "Записан си за AI Exploit Challenge — следваща стъпка вътре";
+  return "Успешно записване за AI Exploit Challenge";
 }
 
 export function welcomeEmailText(name: string) {
