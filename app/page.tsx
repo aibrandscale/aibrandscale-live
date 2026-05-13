@@ -308,22 +308,58 @@ function BrandsStrip() {
     if (!node) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
+
     let raf = 0;
+    let halfWidth = 0;
+    const speed = 60; // px / second
+
+    const measure = () => {
+      // scrollWidth covers the duplicated content; half = one set width
+      const w = node.scrollWidth;
+      if (w > 0) halfWidth = w / 2;
+    };
+
+    // Try to measure once images report a size
+    const imgs = Array.from(node.querySelectorAll("img"));
+    let pending = imgs.length;
+    const onImg = () => { pending -= 1; if (pending <= 0) measure(); };
+    imgs.forEach((img) => {
+      if ((img as HTMLImageElement).complete) onImg();
+      else {
+        img.addEventListener("load", onImg, { once: true });
+        img.addEventListener("error", onImg, { once: true });
+      }
+    });
+    // Initial best-effort measure right away (in case scrollWidth is already valid)
+    measure();
+    // Safety net: re-measure on resize and after a short delay
+    const onResize = () => measure();
+    window.addEventListener("resize", onResize);
+    const t1 = window.setTimeout(measure, 250);
+    const t2 = window.setTimeout(measure, 1500);
+
     let last = performance.now();
     let x = 0;
-    const speed = 60; // px / second
-    const half = () => node.scrollWidth / 2;
     const tick = (now: number) => {
-      const dt = (now - last) / 1000;
+      const dt = Math.min(0.05, (now - last) / 1000); // clamp to avoid jumps when tab returns
       last = now;
-      x -= speed * dt;
-      const h = half();
-      if (h > 0 && Math.abs(x) >= h) x += h;
-      node.style.transform = `translate3d(${x}px, 0, 0)`;
+      if (halfWidth > 0) {
+        x -= speed * dt;
+        if (x <= -halfWidth) x += halfWidth;
+        const tx = `translate3d(${x}px, 0, 0)`;
+        node.style.transform = tx;
+        (node.style as CSSStyleDeclaration & { webkitTransform?: string }).webkitTransform = tx;
+      }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", onResize);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
   }, []);
   return (
     <section style={{ padding: "clamp(56px, 8vw, 96px) clamp(16px, 4vw, 32px)", textAlign: "center" }}>

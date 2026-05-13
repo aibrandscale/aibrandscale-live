@@ -471,6 +471,7 @@ input, textarea {
 .logo-ticker__track--js {
   animation: none !important;
   -webkit-animation: none !important;
+  transition: none !important;
 }
 @media (hover: hover) and (pointer: fine) {
   .logo-ticker:hover .logo-ticker__track { animation-play-state: paused; }
