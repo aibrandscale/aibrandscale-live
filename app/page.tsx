@@ -1282,37 +1282,9 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
       return;
     }
     setStatus("success");
-    // Confetti burst
-    try {
-      const confetti = (await import("canvas-confetti")).default;
-      const colors = ["#34D399", "#10B981", "#A86CE0", "#C49BD9", "#FFFFFF"];
-      const fire = (originX: number) => {
-        confetti({
-          particleCount: 70,
-          spread: 70,
-          startVelocity: 45,
-          origin: { x: originX, y: 0.5 },
-          colors,
-          zIndex: 9999,
-          scalar: 0.95,
-        });
-      };
-      fire(0.2);
-      fire(0.8);
-      setTimeout(() => {
-        confetti({
-          particleCount: 120,
-          spread: 100,
-          startVelocity: 35,
-          origin: { x: 0.5, y: 0.4 },
-          colors,
-          zIndex: 9999,
-          scalar: 1.1,
-        });
-      }, 180);
-    } catch {
-      // confetti is optional eye-candy — never block the flow
-    }
+    // Immediately redirect the user to the Viber group invite.
+    window.location.href =
+      "https://invite.viber.com/?g2=AQBWqAEw5aBBAVaFlLfexB1wlZXqeSP4sgPv%2BTeT1RUT5Lxl8UdVqUTPQM3n7wd2";
   };
 
   if (!open) return null;
