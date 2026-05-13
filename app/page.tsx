@@ -131,7 +131,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           left: 0,
           right: 0,
           height: "min(820px, 100vw)",
-          backgroundImage: "url(/hero-audience.jpg)",
+          backgroundImage: "url(/hero-audience.png)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
