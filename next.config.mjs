@@ -25,8 +25,10 @@ const nextConfig = {
       { source: "/events/:path*", destination: `${CRM_URL}/events/:path*` },
       { source: "/team", destination: `${CRM_URL}/team` },
       { source: "/team/:path*", destination: `${CRM_URL}/team/:path*` },
+      { source: "/book/:path*", destination: `${CRM_URL}/book/:path*` },
       { source: "/api/auth/:path*", destination: `${CRM_URL}/api/auth/:path*` },
       { source: "/api/events/:path*", destination: `${CRM_URL}/api/events/:path*` },
+      { source: "/api/booking/:path*", destination: `${CRM_URL}/api/booking/:path*` },
     ];
   },
 };
