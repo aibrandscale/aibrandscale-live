@@ -458,11 +458,15 @@ input, textarea {
   align-items: center;
   animation: logoTickerLTR 32s linear infinite;
   will-change: transform;
+  transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 .logo-ticker:hover .logo-ticker__track { animation-play-state: paused; }
 @keyframes logoTickerLTR {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
 }
 .logo-ticker__item {
   flex: 0 0 auto;

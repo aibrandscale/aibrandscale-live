@@ -78,7 +78,7 @@ export function PurpleAlertNav({
       style={{
         position: "relative",
         zIndex: 60,
-        minHeight: 48,
+        minHeight: 44,
         background: "rgba(255,255,255,0.002)",
         backdropFilter: "blur(10px)",
         WebkitBackdropFilter: "blur(10px)",
@@ -87,9 +87,10 @@ export function PurpleAlertNav({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "8px 14px",
-        gap: 14,
-        flexWrap: "wrap",
+        padding: "8px 10px",
+        gap: "clamp(8px, 1.6vw, 14px)",
+        flexWrap: "nowrap",
+        whiteSpace: "nowrap",
       }}
     >
       <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
@@ -108,7 +109,7 @@ export function PurpleAlertNav({
           style={{
             fontFamily: "Manrope, sans-serif",
             fontWeight: 800,
-            fontSize: "clamp(13px, 1.6vw, 15px)",
+            fontSize: "clamp(10.5px, 1.6vw, 14px)",
             letterSpacing: "0.12em",
             color: "#EF4444",
             textTransform: "uppercase",
@@ -125,7 +126,7 @@ export function PurpleAlertNav({
         style={{
           fontFamily: "Manrope, sans-serif",
           fontWeight: 800,
-          fontSize: "clamp(13px, 1.6vw, 15px)",
+          fontSize: "clamp(10.5px, 1.6vw, 14px)",
           letterSpacing: "0.02em",
           color: "#FFFFFF",
           textAlign: "center",
@@ -143,7 +144,7 @@ export function PurpleAlertNav({
             style={{
               fontFamily: "Manrope, sans-serif",
               fontWeight: 800,
-              fontSize: "clamp(13px, 1.6vw, 15px)",
+              fontSize: "clamp(10.5px, 1.6vw, 14px)",
               letterSpacing: "0.08em",
               color: "#FFFFFF",
               textTransform: "uppercase",

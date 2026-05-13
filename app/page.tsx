@@ -166,25 +166,19 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           unoptimized
           style={{ width: "clamp(120px, 14vw, 180px)", height: "auto", display: "block", margin: "0 auto 18px", imageRendering: "auto" }}
         />
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "6px 14px", borderRadius: 999, background: "rgba(10,6,18,0.55)", backdropFilter: "blur(8px)", marginBottom: 22 }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff3b3b", boxShadow: "0 0 10px rgba(255,59,59,0.7)", flexShrink: 0 }} aria-hidden />
-          <span style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontWeight: 600 }}>
-            Онлайн обучение на живо · {EVENT_DATE_LABEL.toUpperCase()}
-          </span>
-        </div>
         <h1
           className="font-alfabet-black"
           style={{
-            fontSize: "clamp(22px, 4vw, 40px)",
-            lineHeight: 1.15,
-            letterSpacing: "-0.01em",
+            fontSize: "clamp(28px, 5vw, 48px)",
+            lineHeight: 1.12,
+            letterSpacing: "-0.015em",
             color: COLOR.fg,
             margin: 0,
             textShadow: "0 2px 24px rgba(0,0,0,0.6)",
+            textWrap: "balance",
           }}
         >
-          Предизвиквам те да изградиш бизнес,<br />
-          който прави <span style={{ color: COLOR.purple100 }}>€166 на ден</span> за 30 дни
+          Предизвиквам те да изградиш бизнес, който прави <span style={{ color: COLOR.purple100 }}>€166 на ден</span> за 30 дни
         </h1>
         <p
           style={{
@@ -243,7 +237,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             Какво ще научиш
           </button>
         </div>
-        <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px 24px", fontSize: "clamp(14.5px, 1.7vw, 16.5px)", fontFamily: "Manrope, sans-serif", color: COLOR.fg, fontWeight: 500, textShadow: "0 1px 10px rgba(0,0,0,0.7)" }}>
+        <div style={{ marginTop: 18, display: "flex", flexWrap: "nowrap", justifyContent: "center", gap: "8px 14px", fontSize: "clamp(11.5px, 1.6vw, 15px)", fontFamily: "Manrope, sans-serif", color: COLOR.fg, fontWeight: 500, textShadow: "0 1px 10px rgba(0,0,0,0.7)", whiteSpace: "nowrap" }}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={COLOR.purple100} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ flexShrink: 0 }}>
               <polyline points="16 18 22 12 16 6" />
@@ -355,7 +349,7 @@ function EventDetails({ onOpen }: { onOpen: () => void }) {
       live: true,
       headline: EVENT_DATE_LABEL,
       sub: `${EVENT_TIME_LABEL}`,
-      body: "Едно събитие на живо. Има ограничен брой места за регистрация, но опитът на живо е несравним.",
+      body: "Има ограничен брой места за регистрация, но опитът на живо е несравним.",
       icon: (
         <img src="/icons/calendar.png" alt="" style={{ width: "85%", height: "85%", objectFit: "contain", display: "block", opacity: 0.08, filter: "brightness(0) saturate(100%) invert(74%) sepia(20%) saturate(700%) hue-rotate(240deg)" }} />
       ),
@@ -550,7 +544,7 @@ function SpeakerTimeline({ onOpen }: { onOpen: () => void }) {
           ВАЖНО
         </div>
         <h3 className="speaker-banner__title">ЗАПАЗИ МЯСТОТО СИ ПО-ДОЛУ</h3>
-        <p className="speaker-banner__sub">Ще получиш потвърждение изпратено на имейла ти.</p>
+        <p className="speaker-banner__sub">Ще получиш потвърждение на имейла.</p>
         <div className="speaker-banner__cta">
           <ScrollToFormCTA onOpen={onOpen} fullWidth />
         </div>
@@ -665,7 +659,7 @@ function BenefitsSection() {
     {
       n: "2",
       title: "Ще видиш как намираш първи клиент",
-      body: "За 7 дни. Без cold email спам. Без LinkedIn автоматизация. Без позната в семейството. Точният поток, който работи в България.",
+      body: "За 7 дни. Без cold email спам. Без LinkedIn автоматизация. Без познати в семейството. Точният поток, който работи в България.",
     },
     {
       n: "3",
@@ -722,7 +716,7 @@ function BenefitsSection() {
         ))}
       </div>
       <div style={{ marginTop: 24, maxWidth: 1100, marginLeft: "auto", marginRight: "auto" }}>
-        <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px", borderRadius: 999, border: `1px solid ${COLOR.purple800}`, background: "rgba(85,43,105,0.18)", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: "clamp(12px, 2.2vw, 16px)", fontWeight: 600, width: "100%", textAlign: "center", lineHeight: 1.35 }}>
+        <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, padding: "18px 22px", borderRadius: 28, border: `1px solid ${COLOR.purple800}`, background: "rgba(85,43,105,0.18)", color: COLOR.fg, fontFamily: "Manrope, sans-serif", fontSize: "clamp(14.5px, 2.6vw, 18px)", fontWeight: 600, width: "100%", textAlign: "center", lineHeight: 1.4 }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: COLOR.purple100, boxShadow: `0 0 10px ${COLOR.purple100}`, flexShrink: 0 }} aria-hidden />
           Бонус: ресурси, които ще можеш да вземеш на обучението
         </span>
@@ -1453,7 +1447,7 @@ function Footer() {
             Terms &amp; Conditions
           </a>
         </div>
-        <p style={{ margin: 0, fontSize: 12.5, color: COLOR.fgDim, fontFamily: "Manrope, sans-serif", lineHeight: 1.65, maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
+        <p style={{ margin: 0, fontSize: 11, color: COLOR.fgDim, fontFamily: "Manrope, sans-serif", lineHeight: 1.6, maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
           Този сайт не е част от Facebook или Meta Platforms, Inc. FACEBOOK е регистрирана търговска марка на Meta Platforms, Inc.
         </p>
         <p style={{ marginTop: 22, marginBottom: 0, fontSize: 12, color: COLOR.fgDim, fontFamily: "Manrope, sans-serif", letterSpacing: "0.02em" }}>
