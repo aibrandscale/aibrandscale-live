@@ -457,16 +457,26 @@ input, textarea {
   gap: 88px;
   align-items: center;
   animation: logoTickerLTR 32s linear infinite;
+  -webkit-animation: logoTickerLTR 32s linear infinite;
   will-change: transform;
   transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   -webkit-perspective: 1000;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
 }
-.logo-ticker:hover .logo-ticker__track { animation-play-state: paused; }
+@media (hover: hover) and (pointer: fine) {
+  .logo-ticker:hover .logo-ticker__track { animation-play-state: paused; }
+}
 @keyframes logoTickerLTR {
   from { transform: translate3d(-50%, 0, 0); }
   to   { transform: translate3d(0, 0, 0); }
+}
+@-webkit-keyframes logoTickerLTR {
+  from { -webkit-transform: translate3d(-50%, 0, 0); }
+  to   { -webkit-transform: translate3d(0, 0, 0); }
 }
 .logo-ticker__item {
   flex: 0 0 auto;
