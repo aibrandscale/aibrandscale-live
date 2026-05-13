@@ -21,7 +21,7 @@ const EVENT_ISO = "2026-05-15T18:00:00+03:00";
 function Logo() {
   return (
     <span className="font-alfabet-black tracking-tight text-lg" style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-      <Image src="/nav-icon.png" alt="" width={28} height={28} priority style={{ width: 28, height: 28, display: "block", borderRadius: "50%", objectFit: "cover" }} />
+      <Image src="/nav-icon.jpg" alt="" width={28} height={28} priority style={{ width: 28, height: 28, display: "block", borderRadius: "50%", objectFit: "cover" }} />
       <span style={{ color: "var(--text)" }}>AI Brand</span>{" "}
       <span style={{ color: "var(--accent)" }}>Scale</span>
     </span>
@@ -131,7 +131,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           left: 0,
           right: 0,
           height: "min(820px, 100vw)",
-          backgroundImage: "url(/hero-audience.png)",
+          backgroundImage: "url(/hero-audience.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -257,7 +257,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         </div>
         <div style={{ marginTop: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 12, flexWrap: "nowrap" }}>
           <div aria-hidden style={{ display: "inline-flex", flexShrink: 0 }}>
-            {["/avatar-1.jpg", "/avatar-2.jpg", "/avatar-3.png"].map((src, idx) => (
+            {["/avatar-1.jpg", "/avatar-2.jpg", "/avatar-3.jpg"].map((src, idx) => (
               <span
                 key={idx}
                 style={{
@@ -1031,6 +1031,7 @@ function TestimonialsSection() {
             <iframe
               src={v.src}
               title={v.title}
+              loading="lazy"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
