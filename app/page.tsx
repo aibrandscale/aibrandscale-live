@@ -1259,8 +1259,28 @@ function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }
     }
     setErrors({});
     setStatus("loading");
-    // TODO: wire to /api/optin once tracking is set up.
-    await new Promise((r) => setTimeout(r, 600));
+    try {
+      const res = await fetch("/api/optin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          phone: "+359" + phoneDigits,
+          hp,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setStatus("idle");
+        setErrors({ form: data?.error ?? "Възникна грешка. Опитай отново." });
+        return;
+      }
+    } catch {
+      setStatus("idle");
+      setErrors({ form: "Няма връзка със сървъра. Опитай отново." });
+      return;
+    }
     setStatus("success");
     // Confetti burst
     try {
