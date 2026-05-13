@@ -868,7 +868,7 @@ function CredentialsStrip() {
             <span className="font-alfabet-black" style={{ fontSize: "clamp(40px, 9vw, 84px)", color: COLOR.fg, letterSpacing: "-0.04em", lineHeight: 0.95, background: "linear-gradient(180deg, #FFFFFF 0%, #C49BD9 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", whiteSpace: "nowrap" }}>
               <CountUp target={it.target} prefix={it.prefix} suffix={it.suffix} decimals={it.decimals} />
             </span>
-            <span style={{ fontSize: 15.5, fontFamily: "Manrope, sans-serif", color: COLOR.fgMuted, lineHeight: 1.45, letterSpacing: "0.01em", maxWidth: 200 }}>
+            <span style={{ fontSize: 15.5, fontFamily: "Manrope, sans-serif", color: COLOR.fgMuted, lineHeight: 1.45, letterSpacing: "0.01em", maxWidth: 200, textAlign: "center" }}>
               {it.label}
             </span>
           </div>
